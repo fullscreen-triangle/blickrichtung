@@ -1,0 +1,29 @@
+# Development dependencies for Megaphrenia
+# Install with: pip install -r requirements-dev.txt
+
+# Core dependencies
+-r requirements.txt
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=3.0.0
+pytest-mock>=3.10.0
+
+# Code quality
+black>=22.0.0
+flake8>=4.0.0
+mypy>=0.950
+pylint>=2.15.0
+
+# Visualization (for development/debugging)
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Documentation (if needed)
+# sphinx>=4.0.0
+# sphinx-rtd-theme>=1.0.0
+
+# Jupyter (for interactive development)
+# jupyter>=1.0.0
+# ipython>=8.0.0
+
