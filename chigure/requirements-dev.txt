@@ -1,0 +1,25 @@
+# Development dependencies for Chigure
+# Install with: pip install -r requirements-dev.txt
+
+# Include core requirements
+-r requirements.txt
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=3.0.0
+
+# Code formatting and linting
+black>=22.0.0
+flake8>=4.0.0
+mypy>=0.950
+
+# Interactive development
+ipython>=8.0.0
+jupyter>=1.0.0
+notebook>=6.4.0
+
+# Additional visualization for development
+plotly>=5.0.0
+seaborn>=0.11.0
+networkx>=2.6.0
+

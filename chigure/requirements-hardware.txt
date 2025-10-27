@@ -1,0 +1,18 @@
+# Hardware interface dependencies for Chigure
+# Install with: pip install -r requirements-hardware.txt
+# Only needed if connecting to real hardware
+
+# Include core requirements
+-r requirements.txt
+
+# Serial communication (for sensors, pumps, controllers)
+pyserial>=3.5
+
+# VISA/GPIB communication (for lab instruments)
+pyvisa>=1.12.0
+pyvisa-py>=0.5.3
+
+# Optional: National Instruments drivers (if using NI hardware)
+# Note: Requires separate NI-VISA installation
+# nidaqmx>=0.6.0  # Uncomment if using NI DAQ cards
+

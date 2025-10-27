@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Data
+*.h5
+*.faiss
+*.npy
+*.npz
+*.mzML
+*.mzXML
+*.raw
+
+# Logs
+*.log
+
+# Test data directories
+spectra/
+logs/
+test_data/
+data/
+*.hdf5
+public/
+# Keep specific output files
+output/
+!public/output/visual/videos/analysis_video.mp4
+public/laboratory/
+.env
+.venv
+
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Log files
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache directories
+.cache/
+*/.cache/
+**/.cache/
+
+# Other
+.coverage
+htmlcov/
+.pytest_cache/

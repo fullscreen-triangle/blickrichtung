@@ -1,0 +1,42 @@
+# MANIFEST.in - Specify additional files to include in the package distribution
+
+# Include documentation
+include README.md
+include LICENSE
+include implementation.md
+include ACCOMPLISHMENTS.md
+
+# Include all README files in subdirectories
+recursive-include src *.md
+
+# Include requirements files
+include requirements.txt
+include requirements-dev.txt
+include requirements-hardware.txt
+
+# Include configuration files
+include pyproject.toml
+include setup.py
+
+# Include data files if any
+recursive-include data *.json
+recursive-include data *.csv
+recursive-include data *.txt
+
+# Exclude compiled Python files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude *.so
+global-exclude *.dylib
+
+# Exclude version control
+global-exclude .git*
+global-exclude .DS_Store
+
+# Exclude IDE files
+global-exclude .vscode
+global-exclude .idea
+global-exclude *.swp
+global-exclude *.swo
+
