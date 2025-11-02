@@ -1,0 +1,73 @@
+components:
+- inputs:
+    a: input_a
+    b: input_b
+  name: xor_sum
+  outputs:
+    out: sum
+  parameters: {}
+  type: xor_gate
+- inputs:
+    a: input_a
+    b: input_b
+  name: and_carry
+  outputs:
+    out: carry
+  parameters: {}
+  type: and_gate
+description: 'Half Adder: adds two 1-bit numbers'
+inputs:
+  a: input_a
+  b: input_b
+metadata:
+  complexity: O(1)
+  gates: 2
+  inputs: 2
+  outputs: 2
+name: my_half_adder
+outputs:
+  carry: carry
+  sum: sum
+wires:
+- name: input_a
+  s_coordinates: null
+  source: !!python/tuple
+  - EXTERNAL
+  - a
+  targets:
+  - !!python/tuple
+    - xor_sum
+    - a
+  - !!python/tuple
+    - and_carry
+    - a
+- name: input_b
+  s_coordinates: null
+  source: !!python/tuple
+  - EXTERNAL
+  - b
+  targets:
+  - !!python/tuple
+    - xor_sum
+    - b
+  - !!python/tuple
+    - and_carry
+    - b
+- name: sum
+  s_coordinates: null
+  source: !!python/tuple
+  - xor_sum
+  - out
+  targets:
+  - !!python/tuple
+    - EXTERNAL
+    - sum
+- name: carry
+  s_coordinates: null
+  source: !!python/tuple
+  - and_carry
+  - out
+  targets:
+  - !!python/tuple
+    - EXTERNAL
+    - carry

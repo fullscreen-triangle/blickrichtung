@@ -3,7 +3,7 @@ Megaphrenia Circuits Module
 
 Circuit components for biological integrated circuits:
 - BMD Transistors: Three-terminal oscillatory switches
-- Logic Gates: AND, OR, NOT, NAND, NOR, XOR
+- Logic Gates: Tri-dimensional logic gates (AND, OR, XOR)
 - Flip-Flops: SR, D, JK, T memory elements
 - Registers: Data storage and transfer
 - Memory: S-entropy content-addressable memory
@@ -13,19 +13,23 @@ Circuit components for biological integrated circuits:
 
 from .transistor import BMDTransistor, TransistorType
 from .logic_gates import (
-    LogicGate, ANDGate, ORGate, NOTGate, 
-    NANDGate, NORGate, XORGate
+    TriDimensionalLogicGate,
+    LogicFunction,
+    ANDGate,
+    ORGate,
+    XORGate
 )
+from .combinational import HalfAdder, FullAdder
 
 __all__ = [
     'BMDTransistor',
     'TransistorType',
-    'LogicGate',
+    'TriDimensionalLogicGate',
+    'LogicFunction',
     'ANDGate',
     'ORGate',
-    'NOTGate',
-    'NANDGate',
-    'NORGate',
     'XORGate',
+    'HalfAdder',
+    'FullAdder',
 ]
 

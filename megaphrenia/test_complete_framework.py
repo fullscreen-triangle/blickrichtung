@@ -7,40 +7,79 @@ Tests all components of the Megaphrenia biological integrated circuits framework
 - Hardware harvesters (CPU, screen, EM, memory)
 
 Run this script to verify the complete tri-dimensional S-coordinate BMD operation framework.
+
+PUBLICATION-READY: All results are saved to results/ directory for paper preparation.
 """
 
 import sys
 import numpy as np
 from datetime import datetime
+import json
+import os
+from pathlib import Path
 
 print("=" * 80)
 print("MEGAPHRENIA: BIOLOGICAL INTEGRATED CIRCUITS")
 print("Complete Framework Integration Test")
 print("=" * 80)
-print(f"Test started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+test_start_time = datetime.now()
+print(f"Test started: {test_start_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
 # Track test results
 tests_passed = 0
 tests_failed = 0
 test_results = []
+detailed_results = {}  # For publication data
+
+# Create results directory
+results_dir = Path("results")
+results_dir.mkdir(exist_ok=True)
 
 def run_test(test_name, test_func):
-    """Run a test and track results."""
-    global tests_passed, tests_failed
+    """Run a test and track results with detailed metrics."""
+    global tests_passed, tests_failed, detailed_results
+    
+    test_start = datetime.now()
     try:
         print(f"\n{'='*60}")
         print(f"TEST: {test_name}")
         print('='*60)
-        test_func()
+        
+        # Run test and capture any returned data
+        result_data = test_func()
+        
+        test_end = datetime.now()
+        duration = (test_end - test_start).total_seconds()
+        
         print(f"✅ PASSED: {test_name}")
         tests_passed += 1
         test_results.append((test_name, "PASSED", None))
+        
+        # Store detailed results for publication
+        detailed_results[test_name] = {
+            "status": "PASSED",
+            "duration_seconds": duration,
+            "timestamp": test_end.isoformat(),
+            "data": result_data if result_data else {}
+        }
         return True
+        
     except Exception as e:
+        test_end = datetime.now()
+        duration = (test_end - test_start).total_seconds()
+        
         print(f"❌ FAILED: {test_name}")
         print(f"   Error: {str(e)}")
         tests_failed += 1
         test_results.append((test_name, "FAILED", str(e)))
+        
+        # Store failure details
+        detailed_results[test_name] = {
+            "status": "FAILED",
+            "duration_seconds": duration,
+            "timestamp": test_end.isoformat(),
+            "error": str(e)
+        }
         return False
 
 # =============================================================================
@@ -61,6 +100,21 @@ def test_psychon_creation():
     assert psychon.s_knowledge >= 0, "S_knowledge should be non-negative"
     assert 0 <= psychon.s_time <= 1, "S_time should be in [0,1]"
     assert psychon.s_entropy >= 0, "S_entropy should be non-negative"
+    
+    # Return data for publication
+    return {
+        "psychon_id": psychon.id,
+        "s_knowledge": float(psychon.s_knowledge),
+        "s_time": float(psychon.s_time),
+        "s_entropy": float(psychon.s_entropy),
+        "s_packing": float(psychon.s_packing),
+        "s_hydrophobic": float(psychon.s_hydrophobic),
+        "equivalence_class_id": psychon.equivalence_class.class_id,
+        "equivalence_class_members": psychon.equivalence_class.member_count,
+        "bmd_filtering_efficiency": psychon.bmd_filtering.filtering_efficiency,
+        "frequency_hz": psychon.frequency,
+        "amplitude": psychon.amplitude
+    }
 
 def test_bmd_tri_dimensional_operation():
     """Test BMD tri-dimensional R-C-L operation."""
@@ -104,7 +158,8 @@ def test_s_entropy_calculation():
 
 def test_transistor_tri_dimensional():
     """Test BMD Transistor tri-dimensional operation."""
-    from src.megaphrenia.circuits.transistor import BMDTransistor, OperationMode
+    from src.megaphrenia.circuits.transistor import BMDTransistor
+    from src.megaphrenia.core.bmd_state import OperationMode
     
     transistor = BMDTransistor()
     print(f"  Created transistor: {transistor}")
@@ -321,6 +376,87 @@ if __name__ == "__main__":
     run_test("Screen Oscillation Harvester", test_screen_harvester)
     run_test("Electromagnetic Harvester", test_em_harvester)
     run_test("Memory Access Harvester", test_memory_harvester)
+    
+    # =============================================================================
+    # SAVE RESULTS FOR PUBLICATION
+    # =============================================================================
+    
+    test_end_time = datetime.now()
+    total_duration = (test_end_time - test_start_time).total_seconds()
+    
+    # Compile comprehensive results
+    publication_data = {
+        "metadata": {
+            "test_suite": "Complete Framework Integration Test",
+            "version": "1.0.0",
+            "timestamp": test_end_time.isoformat(),
+            "start_time": test_start_time.isoformat(),
+            "end_time": test_end_time.isoformat(),
+            "total_duration_seconds": total_duration,
+            "platform": sys.platform
+        },
+        "summary": {
+            "total_tests": tests_passed + tests_failed,
+            "passed": tests_passed,
+            "failed": tests_failed,
+            "success_rate": (tests_passed / (tests_passed + tests_failed) * 100) if (tests_passed + tests_failed) > 0 else 0
+        },
+        "test_results": detailed_results,
+        "failed_tests": [
+            {"name": name, "error": error} 
+            for name, status, error in test_results 
+            if status == "FAILED"
+        ]
+    }
+    
+    # Save JSON (complete data)
+    json_file = results_dir / f"framework_test_{test_end_time.strftime('%Y%m%d_%H%M%S')}.json"
+    with open(json_file, 'w', encoding='utf-8') as f:
+        json.dump(publication_data, f, indent=2, ensure_ascii=False)
+    
+    # Save CSV summary (for tables in paper)
+    csv_file = results_dir / f"framework_test_summary_{test_end_time.strftime('%Y%m%d_%H%M%S')}.csv"
+    with open(csv_file, 'w', encoding='utf-8', newline='') as f:
+        f.write("Test Name,Status,Duration (s),Timestamp\n")
+        for test_name, result_data in detailed_results.items():
+            f.write(f'"{test_name}",{result_data["status"]},{result_data["duration_seconds"]:.4f},{result_data["timestamp"]}\n')
+    
+    # Save human-readable report
+    report_file = results_dir / f"framework_test_report_{test_end_time.strftime('%Y%m%d_%H%M%S')}.txt"
+    with open(report_file, 'w', encoding='utf-8') as f:
+        f.write("="*80 + "\n")
+        f.write("MEGAPHRENIA: BIOLOGICAL INTEGRATED CIRCUITS\n")
+        f.write("Complete Framework Integration Test Report\n")
+        f.write("="*80 + "\n\n")
+        f.write(f"Test Date: {test_end_time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"Duration: {total_duration:.2f} seconds\n")
+        f.write(f"Total Tests: {tests_passed + tests_failed}\n")
+        f.write(f"Passed: {tests_passed} ✅\n")
+        f.write(f"Failed: {tests_failed} ❌\n")
+        f.write(f"Success Rate: {publication_data['summary']['success_rate']:.1f}%\n\n")
+        
+        f.write("Test Results:\n")
+        f.write("-"*80 + "\n")
+        for test_name, result_data in detailed_results.items():
+            status_icon = "✅" if result_data["status"] == "PASSED" else "❌"
+            f.write(f"{status_icon} {test_name}: {result_data['status']} ({result_data['duration_seconds']:.3f}s)\n")
+            if "error" in result_data:
+                f.write(f"   Error: {result_data['error']}\n")
+        
+        f.write("\n" + "="*80 + "\n")
+        f.write("Files Saved:\n")
+        f.write(f"  - JSON (complete data): {json_file.name}\n")
+        f.write(f"  - CSV (summary): {csv_file.name}\n")
+        f.write(f"  - TXT (this report): {report_file.name}\n")
+    
+    print("\n" + "="*70)
+    print("📊 RESULTS SAVED FOR PUBLICATION")
+    print("="*70)
+    print(f"✅ JSON (complete data):  results/{json_file.name}")
+    print(f"✅ CSV (summary table):   results/{csv_file.name}")
+    print(f"✅ TXT (human report):    results/{report_file.name}")
+    print(f"\nTotal tests: {tests_passed + tests_failed}")
+    print(f"Data points collected: {len(detailed_results)}")
     
     # =============================================================================
     # FINAL REPORT

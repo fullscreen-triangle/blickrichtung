@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+    <defs>
+    <marker id="arrow6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <polygon points="0,0 6,3 0,6" fill="#333"/>
+    </marker>
+    <style>
+    .label{font-family:DejaVu Sans;font-size:12px;fill:#333}
+    .sub{font-family:DejaVu Sans;font-size:11px;fill:#777}
+    </style>
+    </defs>
+    <text x="450" y="26" text-anchor="middle" class="label" font-size="18">Virtual Processor ALU: S-Coordinate Primitives</text>
+    
+    <!-- ALU block --> <g transform="translate(120,90)"> <rect x="0" y="0" width="660" height="300" rx="14" fill="#f7f7f7" stroke="#bbb"/> <text x="20" y="28" class="label">ALU operations (O(1))</text>
+        <!-- Operations grid -->
+<g transform="translate(20,60)">
+    <!-- S-distance -->
+    <rect x="0" y="0" width="300" height="80" rx="10" fill="#e8f4f9" stroke="#1f77b4"/>
+    <text x="12" y="24" class="label" fill="#1f77b4">S-distance</text>
+    <text x="12" y="48" class="sub">d(SA, SB) = ||SA − SB||</text>
+  
+    <!-- Equivalence -->
+    <rect x="340" y="0" width="300" height="80" rx="10" fill="#eaf7e9" stroke="#2ca02c"/>
+    <text x="352" y="24" class="label" fill="#2ca02c">S-equivalence</text>
+    <text x="352" y="48" class="sub">SA ≡ SB ⇔ d(SA, SB) &lt; ε</text>
+  
+    <!-- Dictionary lookup -->
+    <rect x="0" y="110" width="300" height="80" rx="10" fill="#fdf4e8" stroke="#ff7f0e"/>
+    <text x="12" y="134" class="label" fill="#ff7f0e">Dictionary lookup</text>
+    <text x="12" y="158" class="sub">C = D[S]</text>
+  
+    <!-- Gear multiplication -->
+    <rect x="340" y="110" width="300" height="80" rx="10" fill="#eee7f6" stroke="#9467bd"/>
+    <text x="352" y="134" class="label" fill="#9467bd">Gear ratio multiplication</text>
+    <text x="352" y="158" class="sub">ωout = G · ωin</text>
+  
+    <!-- Transformation -->
+    <rect x="170" y="220" width="300" height="80" rx="10" fill="#fff" stroke="#bbb"/>
+    <text x="182" y="244" class="label">Cross-domain transform</text>
+    <text x="182" y="268" class="sub">Sdielectric = T · Sacoustic + b</text>
+  </g>
+</g> <!-- Tri-dimensional selection --> <g transform="translate(120,420)"> <rect x="0" y="0" width="660" height="80" rx="12" fill="#fff" stroke="#bbb"/> <text x="12" y="24" class="label">Tri-dimensional output selection</text> <text x="12" y="50" class="sub">C = arg min_{C ∈ {Ck, Ct, Ce}} [α Sk(C) + β St(C) + γ Se(C)]</text> </g> </svg>  

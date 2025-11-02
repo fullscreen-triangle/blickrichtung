@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+    <defs>
+    <marker id="arrow5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <polygon points="0,0 6,3 0,6" fill="#333"/>
+    </marker>
+    <style>
+    .label{font-family:DejaVu Sans;font-size:12px;fill:#333}
+    .sub{font-family:DejaVu Sans;font-size:11px;fill:#777}
+    .axis{stroke:#333}
+    </style>
+    </defs>
+    <text x="450" y="26" text-anchor="middle" class="label" font-size="18">S-Dictionary Memory: Content-Addressable Storage</text>
+    
+    <!-- 3D base axes (isometric) --> <g transform="translate(150,260)"> <line x1="0" y1="0" x2="220" y2="0" class="axis" marker-end="url(#arrow5)"/> <line x1="0" y1="0" x2="-120" y2="-80" class="axis" marker-end="url(#arrow5)"/> <line x1="0" y1="0" x2="60" y2="140" class="axis" marker-end="url(#arrow5)"/> <text x="225" y="4" class="sub" fill="#17becf">Sknowledge</text> <text x="-130" y="-84" class="sub" fill="#8c564b">Stime</text> <text x="66" y="152" class="sub" fill="#9467bd">Sentropy</text>
+        <!-- Memory points (keys) -->
+<g>
+    <circle cx="60" cy="-20" r="5" fill="#1f77b4"/>
+    <circle cx="120" cy="10" r="5" fill="#2ca02c"/>
+    <circle cx="30" cy="60" r="5" fill="#ff7f0e"/>
+    <circle cx="150" cy="80" r="5" fill="#9467bd"/>
+    <circle cx="100" cy="-40" r="5" fill="#8c564b"/>
+    <circle cx="20" cy="100" r="5" fill="#17becf"/>
+  </g>
+  
+  <!-- Query point and nearest neighbor ring -->
+  <circle cx="90" cy="20" r="6" fill="#d62728"/>
+  <text x="96" y="12" class="sub" fill="#d62728">Squery</text>
+  <circle cx="120" cy="10" r="14" fill="none" stroke="#d62728" stroke-dasharray="4 3"/>
+  <text x="140" y="0" class="sub">arg min ||S - Squery||</text>
+</g> <!-- Refinement coordinates panel --> <g transform="translate(560,120)"> <rect x="0" y="0" width="280" height="160" rx="10" fill="#fff" stroke="#bbb"/> <text x="12" y="24" class="label">Refinement coordinates</text> <text x="12" y="48" class="sub">S4 = Spacking (geometry)</text> <text x="12" y="68" class="sub">S5 = Shydrophobic (energy)</text> <text x="12" y="92" class="sub">Capacity: N^5 addresses (3D base × 2D refinement)</text> <text x="12" y="116" class="sub">Hole-aware transformer: 22.3% attention on holes</text> </g> <!-- Write/Read flow --> <g transform="translate(120,430)"> <rect x="0" y="0" width="660" height="70" rx="10" fill="#fff" stroke="#bbb"/> <text x="12" y="24" class="label">Operations</text> <text x="12" y="50" class="sub">Write(Saddress, Data): configure holes → D[Saddress] ← Data</text> <text x="340" y="50" class="sub">Read(Squery): retrieve D[arg min ||S - Squery||]</text> </g> </svg>  

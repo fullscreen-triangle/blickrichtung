@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+    <defs>
+    <marker id="arrow8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <polygon points="0,0 6,3 0,6" fill="#333"/>
+    </marker>
+    <style>
+    .label{font-family:DejaVu Sans;font-size:12px;fill:#333}
+    .sub{font-family:DejaVu Sans;font-size:11px;fill:#777}
+    .node{stroke:#333}
+    .edge{stroke:#bbb;stroke-width:1}
+    </style>
+    </defs>
+    <text x="450" y="26" text-anchor="middle" class="label" font-size="18">Harmonic Network (240 Components, 1,847 Edges)</text>
+    
+    <!-- Layer bands --> <g> <rect x="40" y="70" width="820" height="70" fill="#f7f7f7" stroke="#eee"/> <text x="52" y="95" class="sub">Scale 8: Environmental (0.2–1 Hz) — I/O layer</text> <rect x="40" y="140" width="820" height="70" fill="#f9fbf7" stroke="#eee"/> <text x="52" y="165" class="sub">Scale 7: Circadian (1–10 Hz) — Memory/storage</text> <rect x="40" y="210" width="820" height="70" fill="#f7f9fb" stroke="#eee"/> <text x="52" y="235" class="sub">Scale 6: Neural (10–100 Hz) — Processing</text> <rect x="40" y="280" width="820" height="70" fill="#fbf7f9" stroke="#eee"/> <text x="52" y="305" class="sub">Scale 5: Synaptic (100–1,000 Hz) — Fast computation</text> <rect x="40" y="350" width="820" height="70" fill="#f7f7ff" stroke="#eee"/> <text x="52" y="375" class="sub">Scale 4: Enzyme (1–5 kHz) — High-speed interconnects</text> <rect x="40" y="420" width="820" height="70" fill="#f7fff7" stroke="#eee"/> <text x="52" y="445" class="sub">Scale 3: Ion channel (1–5 GHz) — Register transfer</text> <rect x="40" y="490" width="820" height="70" fill="#fff7f7" stroke="#eee"/> <text x="52" y="515" class="sub">Scale 2–1: Protein/Quantum — Gate switching / fundamental</text> </g> <!-- Sample nodes and edges (illustrative subset) --> <g> <!-- Hubs --> <g transform="translate(180,320)"> <circle cx="0" cy="0" r="20" fill="#17becf" class="node"/> <text x="0" y="4" text-anchor="middle" class="sub" fill="#fff">120 Hz</text> <text x="-40" y="32" class="sub">Hard drive clock</text> </g> <g transform="translate(360,320)"> <circle cx="0" cy="0" r="18" fill="#2ca02c" class="node"/> <text x="0" y="4" text-anchor="middle" class="sub" fill="#fff">Engine</text> <text x="-20" y="32" class="sub">120 Hz</text> </g> <g transform="translate(540,250)"> <circle cx="0" cy="0" r="16" fill="#9467bd" class="node"/> <text x="0" y="4" text-anchor="middle" class="sub" fill="#fff">Wing 34.7 Hz</text> </g> <g transform="translate(720,180)"> <circle cx="0" cy="0" r="14" fill="#ff7f0e" class="node"/> <text x="0" y="4" text-anchor="middle" class="sub" fill="#fff">Heart 1.2 Hz</text> </g>
+     <!-- Edges (harmonic coincidences) -->
+<line x1="180" y1="320" x2="360" y2="320" class="edge"/>
+<line x1="180" y1="320" x2="540" y2="250" class="edge"/>
+<line x1="360" y1="320" x2="540" y2="250" class="edge"/>
+<line x1="360" y1="320" x2="720" y2="180" class="edge"/>
+
+<!-- Additional nodes (minor) -->
+<g transform="translate(260,250)">
+  <circle cx="0" cy="0" r="10" fill="#1f77b4" class="node"/>
+  <text x="-26" y="-12" class="sub">Prop 480 Hz</text>
+  <line x1="0" y1="0" x2="-80" y2="70" class="edge"/>
+  <line x1="0" y1="0" x2="80" y2="-0" class="edge"/>
+</g>
+<g transform="translate(600,380)">
+  <circle cx="0" cy="0" r="10" fill="#8c564b" class="node"/>
+  <text x="14" y="-12" class="sub">Thermal 50 Hz</text>
+  <line x1="0" y1="0" x2="-240" y2="-100" class="edge"/>
+</g>
+</g> <!-- O(1) navigation annotation --> <g transform="translate(120,90)"> <rect x="0" y="0" width="300" height="90" rx="10" fill="#fff" stroke="#bbb"/> <text x="12" y="24" class="label">Routing via gear ratios</text> <text x="12" y="48" class="sub">Edge if |n_i f_i − n_j f_j| &lt; 0.1 Hz</text> <text x="12" y="68" class="sub">G_ij = (n_j f_j)/(n_i f_i); O(1) jump</text> </g> </svg>

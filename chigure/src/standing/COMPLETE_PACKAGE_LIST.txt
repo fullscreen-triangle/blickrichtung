@@ -1,0 +1,51 @@
+# COMPLETE PACKAGE LIST FOR THOUGHT VALIDATION
+# ============================================
+# All external packages needed across ALL modules in chigure/src/standing/
+#
+# Installation command (copy-paste ready):
+
+pip install numpy>=1.21.0 pandas>=1.3.0 scipy>=1.7.0 matplotlib>=3.4.0 seaborn>=0.11.0 scikit-learn>=1.0.0 networkx>=2.6.0 statsmodels>=0.13.0 psutil>=5.8.0 requests>=2.26.0 aiohttp>=3.8.0 tqdm>=4.62.0
+
+# Or line-by-line:
+pip install numpy>=1.21.0
+pip install pandas>=1.3.0
+pip install scipy>=1.7.0
+pip install matplotlib>=3.4.0
+pip install seaborn>=0.11.0
+pip install scikit-learn>=1.0.0
+pip install networkx>=2.6.0
+pip install statsmodels>=0.13.0
+pip install psutil>=5.8.0
+pip install requests>=2.26.0
+pip install aiohttp>=3.8.0
+pip install tqdm>=4.62.0
+
+# Package breakdown by module:
+# ============================
+
+# Core (used everywhere):
+# - numpy, pandas, scipy, matplotlib
+
+# precise_clock_apis.py:
+# - requests (HTTP for clock APIs)
+# - aiohttp (async HTTP)
+
+# signal_latencies.py:
+# - psutil (system monitoring)
+
+# cardiac_harmonic_hierarchy_analysis.py:
+# - networkx (graph analysis)
+# - seaborn (statistical plots)
+
+# bmd_equivalence.py:
+# - seaborn (correlation plots)
+
+# statistical_reporting.py:
+# - statsmodels (power analysis)
+
+# adverserial_robustness.py, s_entropy_validation.py:
+# - scikit-learn (ML metrics, optimization)
+
+# Optional:
+# - tqdm (progress bars)
+

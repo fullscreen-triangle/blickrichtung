@@ -1,0 +1,33 @@
+{
+  "analysis_timestamp": "2025-11-02T15:59:06.850997",
+  "sample_sizes": {
+    "n_rem_periods": 0,
+    "n_waking_periods": 69118,
+    "n_cognates": 0
+  },
+  "rem_summary": {
+    "mean_hr": null,
+    "mean_hrv": null,
+    "mean_metabolic": null
+  },
+  "waking_summary": {
+    "mean_hr": 69.11458664891924,
+    "mean_hrv": 91.20463555079719,
+    "mean_metabolic": 128.5398217541017
+  },
+  "thought_signature": {
+    "delta_hr": null,
+    "delta_hrv": null,
+    "delta_metabolic": null,
+    "cognitive_intensity": null,
+    "rem_baseline": null,
+    "waking_cognitive": null,
+    "status": "no_rem_data"
+  },
+  "energy_costs": {
+    "perception_cost": null,
+    "thought_cost": null,
+    "consciousness_cost": null,
+    "baseline_cost": 66.0
+  }
+}

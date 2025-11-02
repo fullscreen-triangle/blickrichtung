@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+    <defs>
+    <marker id="arrow4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <polygon points="0,0 6,3 0,6" fill="#333"/>
+    </marker>
+    <style>
+    .label{font-family:DejaVu Sans;font-size:12px;fill:#333}
+    .sub{font-family:DejaVu Sans;font-size:11px;fill:#777}
+    </style>
+    </defs>
+    <text x="450" y="26" text-anchor="middle" class="label" font-size="18">Gear Ratio Interconnects: O(1) Routing</text>
+    
+    <!-- Source and Target nodes --> <g transform="translate(140,180)"> <circle cx="0" cy="0" r="28" fill="#17becf" stroke="#333"/> <text x="0" y="4" text-anchor="middle" class="label" fill="#fff">Source</text> <text x="-20" y="48" class="sub">ωS</text> </g> <g transform="translate(740,180)"> <circle cx="0" cy="0" r="28" fill="#2ca02c" stroke="#333"/> <text x="0" y="4" text-anchor="middle" class="label" fill="#fff">Target</text> <text x="-20" y="48" class="sub">ωT</text> </g> <!-- Gear assembly (conceptual frequency transform) --> <g transform="translate(360,110)"> <!-- Outer gear --> <circle cx="0" cy="90" r="70" fill="#f7f7f7" stroke="#bbb"/> <!-- Inner gear --> <circle cx="200" cy="90" r="40" fill="#f7f7f7" stroke="#bbb"/> <!-- Teeth (stylized arcs) --> <path d="M-70,90 a70,70 0 0 1 140,0" fill="none" stroke="#bbb" stroke-width="3"/> <path d="M160,90 a40,40 0 0 1 80,0" fill="none" stroke="#bbb" stroke-width="3"/> <!-- Labels --> <text x="0" y="20" text-anchor="middle" class="sub">G = ωT / ωS</text> <text x="100" y="170" text-anchor="middle" class="sub">ωrouted = G · ωS</text> <!-- Flow arrows --> <line x1="-220" y1="90" x2="-70" y2="90" stroke="#333" marker-end="url(#arrow4)"/> <line x1="240" y1="90" x2="360" y2="90" stroke="#333" marker-end="url(#arrow4)"/> </g> <!-- O(1) vs graph routing inset --> <g transform="translate(100,300)"> <rect x="0" y="0" width="700" height="90" rx="10" fill="#fff" stroke="#bbb"/> <text x="12" y="22" class="label">Complexity comparison</text> <text x="12" y="44" class="sub">Traditional routing: O(N log N)</text> <text x="220" y="44" class="sub">→ 5 hops, 47 ms</text> <text x="12" y="68" class="sub">Gear ratio routing: O(1)</text> <text x="220" y="68" class="sub">→ direct jump, 0.002 ms (23,500×)</text> </g> </svg>

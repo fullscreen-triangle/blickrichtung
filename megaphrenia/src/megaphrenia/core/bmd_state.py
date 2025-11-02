@@ -139,8 +139,8 @@ class BMDState:
     # TRI-DIMENSIONAL OPERATION (st-stellas-circuits.tex)
     tri_params: TriDimensionalParameters = field(default_factory=lambda: TriDimensionalParameters(
         R_knowledge=1e6,  # 1 MΩ default
-        C_time=3.18e-7,  # Calculated from τ and R
-        L_entropy=3.14,  # Calculated from τ and R
+        C_time=3.183098861837907e-13,  # C = τ/(πR) = 1e-6/(π×1e6)
+        L_entropy=3.141592653589793e12,  # L = πR/τ = π×1e6/1e-6 = π×10^12
         tau_characteristic=1e-6  # 1 μs characteristic time
     ))
     s_weights: SEntropyWeights = field(default_factory=SEntropyWeights)

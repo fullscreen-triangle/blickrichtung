@@ -166,13 +166,32 @@ class SEntropyNavigator:
         
         lambda_speed = self.lambda_speeds[self.mode]
         
+        # Adaptive learning rate
+        learning_rate = 0.01 if self.mode == NavigationMode.SLOW else 0.001
+        if self.mode == NavigationMode.MIRACULOUS:
+            learning_rate = 0.0001
+        
         for iteration in range(max_iterations):
             # Calculate gradient in S-space
             gradient = self._compute_s_gradient(current_state, target_s_coords)
             
-            # Navigation velocity in S-space
-            # v_nav = dS/dλ × dλ/dt
-            delta_s = -gradient * lambda_speed  # Negative for descent
+            # Normalize gradient to prevent overflow
+            grad_norm = np.linalg.norm(gradient)
+            if grad_norm > 1e-10:  # Avoid division by zero
+                gradient = gradient / grad_norm
+            
+            # Adaptive step size based on distance to target
+            distance = np.linalg.norm(current_state.s_coordinates - target_s_coords)
+            adaptive_factor = min(1.0, distance)  # Slow down near target
+            
+            # Navigation velocity in S-space with clipping
+            # v_nav = dS/dλ × dλ/dt (with safety bounds)
+            step_size = learning_rate * lambda_speed * adaptive_factor
+            delta_s = -gradient * step_size  # Negative for descent
+            
+            # Clip to prevent overflow
+            max_step = 0.5  # Maximum change in any coordinate
+            delta_s = np.clip(delta_s, -max_step, max_step)
             
             # Time increment (can be arbitrarily small)
             # Key: Δt ≪ ΔS/λ_speed (decoupling!)

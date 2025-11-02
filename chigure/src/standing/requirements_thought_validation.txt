@@ -1,0 +1,69 @@
+# Requirements for thought_validation.py
+# ======================================
+# 
+# This file lists all external packages needed to run the thought validation pipeline.
+# Install with: pip install -r requirements_thought_validation.txt
+#
+# Or use the parent project's pyproject.toml:
+# From the chigure/ directory: pip install -e .
+
+# Core numerical and data processing
+numpy>=1.21.0
+pandas>=1.3.0
+scipy>=1.7.0
+
+# Standard library packages (no installation needed, but listed for reference)
+# - json (built-in)
+# - time (built-in)
+# - datetime (built-in)
+# - pathlib (built-in, Python 3.4+)
+# - typing (built-in, Python 3.5+)
+# - dataclasses (built-in, Python 3.7+)
+# - logging (built-in)
+# - socket (built-in)
+# - struct (built-in)
+# - threading (built-in)
+# - asyncio (built-in, Python 3.4+)
+# - concurrent.futures (built-in, Python 3.2+)
+# - sqlite3 (built-in)
+# - pickle (built-in)
+# - enum (built-in, Python 3.4+)
+# - math (built-in)
+# - statistics (built-in, Python 3.4+)
+# - warnings (built-in)
+
+# Machine learning
+scikit-learn>=1.0.0      # For clustering/regression/metrics in multiple modules
+
+# Visualization
+matplotlib>=3.4.0        # For plotting in multiple modules
+seaborn>=0.11.0          # For statistical plots (cardiac_harmonic, bmd_equivalence)
+
+# Network analysis
+networkx>=2.6.0          # For graph analysis (cardiac_harmonic_hierarchy_analysis)
+
+# Statistical modeling
+statsmodels>=0.13.0      # For power analysis (statistical_reporting)
+
+# System monitoring and networking
+psutil>=5.8.0            # For system metrics (signal_latencies)
+requests>=2.26.0         # For HTTP requests (precise_clock_apis)
+aiohttp>=3.8.0           # For async HTTP (precise_clock_apis)
+
+# Progress bars (optional)
+tqdm>=4.62.0             # For progress bars in long operations
+
+# Notes:
+# ------
+# 1. All local module imports (mimo_signal_amplification, precise_clock_apis, etc.)
+#    are from the chigure/src/standing directory and don't require separate installation
+#
+# 2. Make sure you're running from the correct directory:
+#    cd chigure/src/standing
+#
+# 3. Or add the chigure/src/standing directory to your PYTHONPATH:
+#    export PYTHONPATH="${PYTHONPATH}:/path/to/chigure/src/standing"
+#    (On Windows: set PYTHONPATH=%PYTHONPATH%;C:\path\to\chigure\src\standing)
+#
+# 4. Python version requirement: Python >= 3.8 (for dataclasses support)
+

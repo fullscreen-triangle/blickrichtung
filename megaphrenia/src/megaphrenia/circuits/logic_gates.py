@@ -140,10 +140,17 @@ class TriDimensionalLogicGate:
         
         return outputs
     
-    def compute_s_entropy_costs(self, outputs: Dict[LogicFunction, bool], 
+    def compute_s_entropy_scores(self, outputs: Dict[LogicFunction, bool], 
                                 s_knowledge: float, s_time: float, s_entropy: float) -> Dict[LogicFunction, float]:
         """
-        Compute S-entropy cost for each logic function output.
+        Compute S-entropy affinity score for each logic function output.
+        
+        CORRECTED LOGIC: High S-coordinate in a dimension means we should USE that dimension's function.
+        - High S_knowledge → Use AND (knowledge dimension function)
+        - High S_time → Use OR (time dimension function)
+        - High S_entropy → Use XOR (entropy dimension function)
+        
+        We compute affinity scores (higher = better match) and select the maximum.
         
         Args:
             outputs: Dictionary of computed outputs for each function
@@ -152,26 +159,33 @@ class TriDimensionalLogicGate:
             s_entropy: S_entropy value for current context
             
         Returns:
-            Dictionary mapping LogicFunction to S-entropy cost
+            Dictionary mapping LogicFunction to affinity score (higher = better)
         """
         alpha, beta, gamma = self.s_weights.normalized
         
-        # Cost = weighted S-coordinate for the dimension that function optimizes
-        costs = {
-            LogicFunction.AND: alpha * s_knowledge,  # AND minimizes S_knowledge
-            LogicFunction.OR: beta * s_time,  # OR minimizes S_time
-            LogicFunction.XOR: gamma * s_entropy  # XOR minimizes S_entropy
+        # Affinity score = weighted S-coordinate for the dimension that function operates in
+        # Higher score means function is more appropriate for current context
+        scores = {
+            LogicFunction.AND: alpha * s_knowledge,  # AND operates in S_knowledge dimension
+            LogicFunction.OR: beta * s_time,  # OR operates in S_time dimension
+            LogicFunction.XOR: gamma * s_entropy  # XOR operates in S_entropy dimension
         }
         
-        return costs
+        return scores
     
     def select_optimal_output(self, outputs: Dict[LogicFunction, bool], 
                              s_knowledge: float, s_time: float, s_entropy: float) -> Tuple[LogicFunction, bool]:
         """
-        Select optimal output via S-entropy minimization.
+        Select optimal output via S-entropy affinity maximization.
         
-        From st-stellas-circuits.tex:
-          Y_optimal = argmin[α·S_k + β·S_t + γ·S_e]
+        CORRECTED: From st-stellas-circuits.tex, we select the function whose dimension
+        has the highest S-coordinate, weighted by importance:
+          Y_optimal = argmax[α·S_k(AND), β·S_t(OR), γ·S_e(XOR)]
+        
+        This ensures:
+        - High S_knowledge → Select AND (knowledge dimension function)
+        - High S_time → Select OR (time dimension function)
+        - High S_entropy → Select XOR (entropy dimension function)
         
         Args:
             outputs: Dictionary of computed outputs
@@ -182,11 +196,11 @@ class TriDimensionalLogicGate:
         Returns:
             Tuple of (selected_function, output_value)
         """
-        # Compute S-entropy costs for each function
-        costs = self.compute_s_entropy_costs(outputs, s_knowledge, s_time, s_entropy)
+        # Compute S-entropy affinity scores for each function
+        scores = self.compute_s_entropy_scores(outputs, s_knowledge, s_time, s_entropy)
         
-        # Select function with minimum cost
-        optimal_function = min(costs.items(), key=lambda x: x[1])[0]
+        # Select function with maximum affinity score (highest = best match)
+        optimal_function = max(scores.items(), key=lambda x: x[1])[0]
         optimal_output = outputs[optimal_function]
         
         # Update tracking

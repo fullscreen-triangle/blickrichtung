@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+    <defs>
+    <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <polygon points="0,0 6,3 0,6" fill="#333"/>
+    </marker>
+    <style>
+    .label{font-family:DejaVu Sans;font-size:12px;fill:#333}
+    .sub{font-family:DejaVu Sans;font-size:11px;fill:#777}
+    </style>
+    </defs>
+    <text x="450" y="26" text-anchor="middle" class="label" font-size="18">Tri-Dimensional S-Coordinate Logic Gate</text>
+    
+    <!-- Inputs --> <g transform="translate(80,120)"> <circle cx="0" cy="0" r="10" fill="#17becf"/> <text x="-6" y="-20" class="sub">A</text> <line x1="10" y1="0" x2="120" y2="0" stroke="#333" marker-end="url(#arrow3)"/> </g> <g transform="translate(80,200)"> <circle cx="0" cy="0" r="10" fill="#8c564b"/> <text x="-6" y="-20" class="sub">B</text> <line x1="10" y1="0" x2="120" y2="0" stroke="#333" marker-end="url(#arrow3)"/> </g> <!-- Parallel channels --> <g transform="translate(140,80)"> <!-- AND --> <rect x="0" y="0" width="220" height="60" rx="8" fill="#e8f4f9" stroke="#1f77b4"/> <text x="10" y="20" class="label" fill="#1f77b4">AND Channel (Sknowledge)</text> <text x="10" y="40" class="sub">YAND = A ∧ B</text> <line x1="220" y1="30" x2="280" y2="30" stroke="#333" marker-end="url(#arrow3)"/>
+        <!-- OR -->
+<rect x="0" y="90" width="220" height="60" rx="8" fill="#eaf7e9" stroke="#2ca02c"/>
+<text x="10" y="110" class="label" fill="#2ca02c">OR Channel (Stime)</text>
+<text x="10" y="130" class="sub">YOR = A ∨ B</text>
+<line x1="220" y1="120" x2="280" y2="120" stroke="#333" marker-end="url(#arrow3)"/>
+
+<!-- XOR -->
+<rect x="0" y="180" width="220" height="60" rx="8" fill="#eee7f6" stroke="#9467bd"/>
+<text x="10" y="200" class="label" fill="#9467bd">XOR Channel (Sentropy)</text>
+<text x="10" y="220" class="sub">YXOR = A ⊕ B</text>
+<line x1="220" y1="210" x2="280" y2="210" stroke="#333" marker-end="url(#arrow3)"/>
+
+<!-- Comparator -->
+<polygon points="280,20 330,60 280,100 230,60" fill="#fff" stroke="#777"/>
+<text x="280" y="64" text-anchor="middle" class="label">S-distance comparator</text>
+<text x="230" y="120" class="sub">Y = arg min{dAND, dOR, dXOR}</text>
+
+<!-- Output -->
+<rect x="360" y="60" width="180" height="60" rx="8" fill="#fdf4e8" stroke="#ff7f0e"/>
+<text x="450" y="80" text-anchor="middle" class="label" fill="#ff7f0e">Yoptimal</text>
+<text x="370" y="100" class="sub">minimize αSk+βSt+γSe</text>
+<line x1="540" y1="90" x2="620" y2="90" stroke="#333" marker-end="url(#arrow3)"/>
+<text x="630" y="94" class="sub">Output</text>
+</g> </svg>

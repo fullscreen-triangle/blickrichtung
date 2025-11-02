@@ -1,0 +1,12 @@
+================================================================================
+CHARGE DYNAMICS AND P-N JUNCTION VALIDATION REPORT
+================================================================================
+
+Generated: 20251030_043235
+
+OBJECTIVE:
+Validate biological semiconductor charge carrier dynamics and P-N junction
+properties measured in integrated circuits and pharmacodynamics papers.
+
+MEASURED PARAMETERS:
+  • Hole mobility: 0.0123 cm²/(V·s)

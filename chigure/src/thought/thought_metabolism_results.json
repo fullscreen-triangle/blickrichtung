@@ -1,0 +1,20 @@
+{
+  "n_mirror_pairs": 0,
+  "mean_thought_kcal_per_day": 0.0,
+  "std_thought_kcal_per_day": 0.0,
+  "mean_thought_watts": 0.0,
+  "std_thought_watts": 0.0,
+  "mean_thought_kcal_per_hr": 0.0,
+  "std_thought_kcal_per_hr": 0.0,
+  "median_thought_kcal_per_day": 0.0,
+  "body_weight_kg": 70,
+  "theoretical_constants": {
+    "baseline_met": 0.9,
+    "error_accumulation_coeff": 0.1,
+    "deep_cleanup_coeff": 2.5,
+    "rem_cleanup_coeff": 2.0,
+    "o2_info_density": 3200000000000000.0,
+    "universal_osc_constant": 2.3
+  },
+  "details": []
+}

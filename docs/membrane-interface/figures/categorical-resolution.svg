@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="Categorical resolution of Gibbs paradox diagram"> <defs> <style> .t { font-family: 'Helvetica, Arial, sans-serif'; fill: #111; } .label { font-size: 26px; font-weight: 600; } .small { font-size: 20px; } .axis { stroke: #333; stroke-width: 2; fill: none; } .arrow { marker-end: url(#arrow); } .box { fill: none; stroke: #444; stroke-width: 3; } .gasA { fill: #4C78A8; opacity: 0.15; } .gasB { fill: #F58518; opacity: 0.15; } .dotA { fill: #4C78A8; } .dotB { fill: #F58518; } .catA { fill: #7A5195; } .catB { fill: #FFA600; } .mix { fill: #54A24B; } .tick { stroke: #666; stroke-width: 1.5; } .grid { stroke: #ddd; stroke-width: 1; } .curve { fill: none; stroke-width: 3; } </style> <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"> <path d="M0,0 L8,3 L0,6 Z" fill="#333"/> </marker> </defs> <!-- Titles -->
+    <text x="600" y="40" text-anchor="middle" class="t label">Categorical Resolution of Gibbs’ Paradox</text>
+    <text x="600" y="75" text-anchor="middle" class="t small">Same spatial configuration q, different categorical positions C → S(q, C_final) &gt; S(q, C_initial)</text>
+    <!-- Left: Spatial configuration panels --> <g transform="translate(50,120)"> <text x="250" y="-20" text-anchor="middle" class="t label">Spatial Configuration q</text>
+        <!-- Initial: separated -->
+<text x="120" y="20" class="t small">Initial (Separated)</text>
+<g transform="translate(0,35)">
+  <rect x="0" y="0" width="220" height="180" class="box"/>
+  <line x1="110" y1="0" x2="110" y2="180" class="axis" stroke-dasharray="6,6"/>
+  <!-- particles left (A) -->
+  <g>
+    <!-- scatter A -->
+    <circle cx="25" cy="25" r="3" class="dotA"/>
+    <circle cx="45" cy="60" r="3" class="dotA"/>
+    <circle cx="80" cy="40" r="3" class="dotA"/>
+    <circle cx="70" cy="100" r="3" class="dotA"/>
+    <circle cx="35" cy="140" r="3" class="dotA"/>
+    <circle cx="95" cy="150" r="3" class="dotA"/>
+    <circle cx="60" cy="130" r="3" class="dotA"/>
+    <circle cx="85" cy="90" r="3" class="dotA"/>
+  </g>
+  <!-- particles right (B) -->
+  <g transform="translate(110,0)">
+    <circle cx="25" cy="25" r="3" class="dotB"/>
+    <circle cx="45" cy="60" r="3" class="dotB"/>
+    <circle cx="80" cy="40" r="3" class="dotB"/>
+    <circle cx="70" cy="100" r="3" class="dotB"/>
+    <circle cx="35" cy="140" r="3" class="dotB"/>
+    <circle cx="95" cy="150" r="3" class="dotB"/>
+    <circle cx="60" cy="130" r="3" class="dotB"/>
+    <circle cx="85" cy="90" r="3" class="dotB"/>
+  </g>
+  <!-- shading -->
+  <rect x="0" y="0" width="110" height="180" class="gasA"/>
+  <rect x="110" y="0" width="110" height="180" class="gasB"/>
+  <text x="55" y="170" text-anchor="middle" class="t small">A</text>
+  <text x="165" y="170" text-anchor="middle" class="t small">B</text>
+</g>
+
+<!-- Mixed -->
+<text x="420" y="20" class="t small">Mixed</text>
+<g transform="translate(300,35)">
+  <rect x="0" y="0" width="220" height="180" class="box"/>
+  <!-- particles mixed -->
+  <g>
+    <circle cx="25" cy="25" r="3" class="dotA"/>
+    <circle cx="45" cy="60" r="3" class="dotB"/>
+    <circle cx="80" cy="40" r="3" class="dotA"/>
+    <circle cx="70" cy="100" r="3" class="dotB"/>
+    <circle cx="35" cy="140" r="3" class="dotA"/>
+    <circle cx="95" cy="150" r="3" class="dotB"/>
+    <circle cx="160" cy="30" r="3" class="dotA"/>
+    <circle cx="200" cy="60" r="3" class="dotB"/>
+    <circle cx="150" cy="100" r="3" class="dotA"/>
+    <circle cx="180" cy="140" r="3" class="dotB"/>
+    <circle cx="60" cy="130" r="3" class="dotA"/>
+    <circle cx="85" cy="90" r="3" class="dotB"/>
+  </g>
+  <rect x="0" y="0" width="220" height="180" class="mix"/>
+  <text x="110" y="170" text-anchor="middle" class="t small">A + B</text>
+</g>
+
+<!-- Re-separated (spatially identical to initial) -->
+<text x="720" y="20" class="t small">Re-separated (q identical)</text>
+<g transform="translate(600,35)">
+  <rect x="0" y="0" width="220" height="180" class="box"/>
+  <line x1="110" y1="0" x2="110" y2="180" class="axis" stroke-dasharray="6,6"/>
+  <!-- particles left (A) -->
+  <g>
+    <circle cx="25" cy="25" r="3" class="dotA"/>
+    <circle cx="45" cy="60" r="3" class="dotA"/>
+    <circle cx="80" cy="40" r="3" class="dotA"/>
+    <circle cx="70" cy="100" r="3" class="dotA"/>
+    <circle cx="35" cy="140" r="3" class="dotA"/>
+    <circle cx="95" cy="150" r="3" class="dotA"/>
+    <circle cx="60" cy="130" r="3" class="dotA"/>
+    <circle cx="85" cy="90" r="3" class="dotA"/>
+  </g>
+  <!-- particles right (B) -->
+  <g transform="translate(110,0)">
+    <circle cx="25" cy="25" r="3" class="dotB"/>
+    <circle cx="45" cy="60" r="3" class="dotB"/>
+    <circle cx="80" cy="40" r="3" class="dotB"/>
+    <circle cx="70" cy="100" r="3" class="dotB"/>
+    <circle cx="35" cy="140" r="3" class="dotB"/>
+    <circle cx="95" cy="150" r="3" class="dotB"/>
+    <circle cx="60" cy="130" r="3" class="dotB"/>
+    <circle cx="85" cy="90" r="3" class="dotB"/>
+  </g>
+  <rect x="0" y="0" width="110" height="180" class="gasA"/>
+  <rect x="110" y="0" width="110" height="180" class="gasB"/>
+  <text x="55" y="170" text-anchor="middle" class="t small">A</text>
+  <text x="165" y="170" text-anchor="middle" class="t small">B</text>
+</g>
+</g> <!-- Right: Categorical axis and entropy change --> <g transform="translate(840,120)"> <text x="180" y="-20" text-anchor="middle" class="t label">Categorical Positions</text> <!-- C-axis --> <line x1="180" y1="0" x2="180" y2="260" class="axis"/> <text x="190" y="-5" class="t small">C</text>
+    <!-- positions -->
+<circle cx="180" cy="30" r="6" class="catA"/>
+<text x="200" y="35" class="t small">C_initial</text>
+
+<circle cx="180" cy="120" r="6" class="mix"/>
+<text x="200" y="125" class="t small">C_mixed (new states)</text>
+
+<circle cx="180" cy="210" r="6" class="catB"/>
+<text x="200" y="215" class="t small">C_final ≠ C_initial</text>
+
+<!-- arrows -->
+<line x1="180" y1="36" x2="180" y2="114" class="axis arrow"/>
+<line x1="180" y1="126" x2="180" y2="204" class="axis arrow"/>
+
+<!-- Entropy annotation -->
+<g transform="translate(-20,300)">
+  <text x="200" y="0" text-anchor="middle" class="t label">S(q, C_final) &lt; S(q, C_initial)</text>
+  <path d="M80,20 C140,-10 260,-10 320,20" class="curve" stroke="#7A5195"/>
+  <text x="200" y="55" text-anchor="middle" class="t small">Same q, increased completed categorical states → higher S</text>
+</g>
+</g> <!-- Legend --> <g transform="translate(60,620)"> <rect x="0" y="-18" width="1080" height="60" fill="none" stroke="#bbb"/> <circle cx="30" cy="0" r="6" class="dotA"/><text x="50" y="6" class="t small">Gas A molecules</text> <circle cx="230" cy="0" r="6" class="dotB"/><text x="250" y="6" class="t small">Gas B molecules</text> <rect x="460" y="-12" width="30" height="24" class="gasA"/><text x="500" y="6" class="t small">Region occupied by A</text> <rect x="690" y="-12" width="30" height="24" class="gasB"/><text x="730" y="6" class="t small">Region occupied by B</text> <rect x="920" y="-12" width="30" height="24" class="mix"/><text x="960" y="6" class="t small">Mixed state</text> </g> </svg>

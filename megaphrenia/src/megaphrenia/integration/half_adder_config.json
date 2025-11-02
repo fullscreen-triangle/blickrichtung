@@ -1,0 +1,110 @@
+{
+  "name": "my_half_adder",
+  "description": "Half Adder: adds two 1-bit numbers",
+  "components": [
+    {
+      "name": "xor_sum",
+      "type": "xor_gate",
+      "parameters": {},
+      "inputs": {
+        "a": "input_a",
+        "b": "input_b"
+      },
+      "outputs": {
+        "out": "sum"
+      }
+    },
+    {
+      "name": "and_carry",
+      "type": "and_gate",
+      "parameters": {},
+      "inputs": {
+        "a": "input_a",
+        "b": "input_b"
+      },
+      "outputs": {
+        "out": "carry"
+      }
+    }
+  ],
+  "wires": [
+    {
+      "name": "input_a",
+      "source": [
+        "EXTERNAL",
+        "a"
+      ],
+      "targets": [
+        [
+          "xor_sum",
+          "a"
+        ],
+        [
+          "and_carry",
+          "a"
+        ]
+      ],
+      "s_coordinates": null
+    },
+    {
+      "name": "input_b",
+      "source": [
+        "EXTERNAL",
+        "b"
+      ],
+      "targets": [
+        [
+          "xor_sum",
+          "b"
+        ],
+        [
+          "and_carry",
+          "b"
+        ]
+      ],
+      "s_coordinates": null
+    },
+    {
+      "name": "sum",
+      "source": [
+        "xor_sum",
+        "out"
+      ],
+      "targets": [
+        [
+          "EXTERNAL",
+          "sum"
+        ]
+      ],
+      "s_coordinates": null
+    },
+    {
+      "name": "carry",
+      "source": [
+        "and_carry",
+        "out"
+      ],
+      "targets": [
+        [
+          "EXTERNAL",
+          "carry"
+        ]
+      ],
+      "s_coordinates": null
+    }
+  ],
+  "inputs": {
+    "a": "input_a",
+    "b": "input_b"
+  },
+  "outputs": {
+    "sum": "sum",
+    "carry": "carry"
+  },
+  "metadata": {
+    "gates": 2,
+    "inputs": 2,
+    "outputs": 2,
+    "complexity": "O(1)"
+  }
+}
