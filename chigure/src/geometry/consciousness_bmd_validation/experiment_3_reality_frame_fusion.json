@@ -1,0 +1,16 @@
+{
+  "fusion_analysis": {
+    "mean_fusion_strength": 0.0048000000000000004,
+    "fusion_stability": -5.377042156569665,
+    "mean_frames_per_moment": 0.024,
+    "fusion_successful": "False"
+  },
+  "continuity_analysis": {
+    "consciousness_gaps": 0.135,
+    "consciousness_continuous": "False"
+  },
+  "simulation_duration": 10.0,
+  "time_resolution": 0.01,
+  "experiment": "Reality-Frame Fusion Dynamics",
+  "validation_success": "False"
+}

@@ -78,10 +78,11 @@ class MultiScaleOscillatoryConsciousnessValidator:
         
         results = {}
         
-        # Simulation parameters
-        dt = 1e-8  # Very fine resolution to capture fastest scales
+        # Simulation parameters (REDUCED for memory efficiency)
+        dt = 1e-4  # 0.1 millisecond resolution (was 1e-8 - too memory intensive!)
         t_total = 1.0  # 1 second total
         time = np.arange(0, t_total, dt)
+        print(f"  Simulation: {len(time)} time points ({t_total}s at {dt*1000}ms resolution)")
         
         # Initialize oscillators for each scale
         oscillators = {}
@@ -207,10 +208,11 @@ class MultiScaleOscillatoryConsciousnessValidator:
         for scenario_name, scenario_params in coupling_scenarios.items():
             print(f"Testing {scenario_name}...")
             
-            # Simulation parameters for this scenario
-            dt = 1e-6  # 1 microsecond steps
+            # Simulation parameters for this scenario (REDUCED for memory)
+            dt = 1e-4  # 0.1 millisecond steps (was 1e-6 - too memory intensive!)
             t_total = 2.0  # 2 seconds
             time = np.arange(0, t_total, dt)
+            print(f"  Simulating {len(time)} time points...")
             
             # Initialize oscillators
             phases = {}
@@ -766,8 +768,75 @@ class MultiScaleOscillatoryConsciousnessValidator:
     
     def _plot_hierarchical_synchronization(self, phases, sync_analysis, consciousness_sync, time):
         """Create plots for hierarchical synchronization"""
-        # Implementation would create comprehensive visualizations
-        pass
+        fig, axes = plt.subplots(2, 2, figsize=(16, 10))
+        fig.suptitle('12-Level Hierarchical Synchronization Analysis', fontsize=16)
+        
+        # Plot 1: Synchronization matrix
+        ax1 = axes[0, 0]
+        sync_matrix = sync_analysis['sync_matrix']
+        im = ax1.imshow(sync_matrix, cmap='hot', aspect='auto', vmin=0, vmax=1)
+        ax1.set_title('Pairwise Synchronization Matrix', fontsize=12)
+        ax1.set_xlabel('Scale Level', fontsize=10)
+        ax1.set_ylabel('Scale Level', fontsize=10)
+        plt.colorbar(im, ax=ax1, label='Sync Value')
+        
+        # Plot 2: Phase evolution (sampled for visualization)
+        ax2 = axes[0, 1]
+        sample_indices = np.linspace(0, len(time)-1, min(500, len(time)), dtype=int)
+        sampled_time = time[sample_indices] * 1000  # Convert to ms
+        
+        # Plot consciousness level and key coupled scales
+        key_levels = [2, 7, 9]  # Quantum, cognitive, consciousness
+        colors = ['blue', 'green', 'red']
+        for level, color in zip(key_levels, colors):
+            if level in phases:
+                sampled_phase = phases[level][sample_indices]
+                ax2.plot(sampled_time, np.cos(sampled_phase), 
+                        label=f'Level {level}: {self.oscillatory_scales[level]["name"]}',
+                        color=color, linewidth=0.8, alpha=0.7)
+        ax2.set_xlabel('Time (ms)', fontsize=10)
+        ax2.set_ylabel('Phase (cos)', fontsize=10)
+        ax2.set_title('Key Scale Phase Evolution', fontsize=12)
+        ax2.legend(fontsize=8)
+        ax2.grid(True, alpha=0.3)
+        
+        # Plot 3: Synchronization by scale
+        ax3 = axes[1, 0]
+        scale_levels = list(phases.keys())
+        consciousness_idx = self.consciousness_level - 1
+        sync_with_consciousness = sync_matrix[consciousness_idx, :]
+        
+        bars = ax3.bar(scale_levels, sync_with_consciousness, color='steelblue', alpha=0.7)
+        bars[consciousness_idx].set_color('red')  # Highlight consciousness level
+        ax3.set_xlabel('Scale Level', fontsize=10)
+        ax3.set_ylabel('Sync with Consciousness', fontsize=10)
+        ax3.set_title('Synchronization with Consciousness Level', fontsize=12)
+        ax3.axhline(y=0.5, color='r', linestyle='--', label='Strong Sync Threshold')
+        ax3.legend()
+        ax3.grid(True, alpha=0.3, axis='y')
+        
+        # Plot 4: Overall sync statistics
+        ax4 = axes[1, 1]
+        sync_stats = [
+            ('Mean Sync', sync_analysis['mean_synchronization']),
+            ('Primary Scales', consciousness_sync['mean_primary_sync']),
+            ('Success Threshold', 0.3)
+        ]
+        labels = [s[0] for s in sync_stats]
+        values = [s[1] for s in sync_stats]
+        colors_bars = ['steelblue', 'mediumseagreen', 'coral']
+        
+        bars = ax4.barh(labels, values, color=colors_bars, alpha=0.7)
+        ax4.set_xlabel('Sync Value', fontsize=10)
+        ax4.set_title('Synchronization Statistics', fontsize=12)
+        ax4.set_xlim([0, 1])
+        ax4.grid(True, alpha=0.3, axis='x')
+        
+        plt.tight_layout()
+        plt.savefig(self.results_dir / 'hierarchical_synchronization.png', dpi=150, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  Saved: hierarchical_synchronization.png")
     
     def _create_scenario_coupling_matrix(self, scenario_params):
         """Create scenario-specific coupling matrix"""
@@ -997,3 +1066,22 @@ class MultiScaleOscillatoryConsciousnessValidator:
         }
         
         return summary
+
+
+if __name__ == "__main__":
+    """
+    Direct execution - run all experiments
+    """
+    print("\n🚀 Running Multi-Scale Oscillatory Consciousness Validator Directly\n")
+    
+    # Create validator
+    validator = MultiScaleOscillatoryConsciousnessValidator(
+        results_dir="consciousness_multiscale_validation"
+    )
+    
+    # Run all experiments
+    results = validator.run_all_experiments()
+    
+    print("\n✅ All experiments complete!")
+    print(f"📊 Results saved to: consciousness_multiscale_validation/")
+    print(f"🎊 Overall validation success: {results.get('overall_validation_success', False)}")

@@ -1,0 +1,17 @@
+{
+  "consistency_analysis": {
+    "violation_rate": 0.9854666666666667,
+    "consistency_rate": 0.005,
+    "total_violations": 59128,
+    "consistency_maintained": false
+  },
+  "constraint_validation": {
+    "low_violation_rate": false,
+    "high_consistency": false,
+    "constraints_satisfied": false
+  },
+  "total_time_points": 60000,
+  "sampled_points": 600,
+  "experiment": "Temporal Consistency Constraints",
+  "validation_success": false
+}

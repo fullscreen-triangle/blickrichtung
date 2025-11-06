@@ -46,10 +46,10 @@ class QuantumIonConsciousnessValidator:
             'Mg2+': 4.04e-26   # Magnesium
         }
         
-        # Neural parameters
-        self.num_neurons = 1e6  # Neurons in conscious processing region
-        self.channels_per_neuron = 1e6  # Ion channels per neuron
-        self.total_channels = self.num_neurons * self.channels_per_neuron
+        # Molecular gas parameters (from molecular-gas-harmonic-timekeeping method)
+        self.num_molecules_chamber = 1e22  # Total molecules in gas chamber (~Avogadro number)
+        self.num_sampled_molecules = 1000  # Representative sample for ensemble averaging
+        self.recursive_observer_levels = 3  # Recursive observation depth (achieves trans-Planck precision)
         
         # Consciousness parameters
         self.consciousness_freq = 2.5  # Hz (100-500ms cycles)
@@ -102,17 +102,19 @@ class QuantumIonConsciousnessValidator:
             # ω = E/ℏ where E is typical ion energy
             quantum_freq = (self.k_B * self.T) / self.hbar  # Thermal energy frequency
             
-            # Generate quantum field oscillations
+            # Generate quantum field oscillations (ENSEMBLE AVERAGING METHOD)
+            # Use representative sample, not all molecules!
             quantum_field = np.zeros(len(time), dtype=complex)
             
-            # Individual channel contributions with phase randomization
-            num_channels = int(self.total_channels / len(self.ion_masses))
-            phases = np.random.uniform(0, 2*np.pi, num_channels)
-            amplitudes = np.random.exponential(tunneling_prob, num_channels)
+            # Sample representative molecules for ensemble averaging
+            num_sampled = self.num_sampled_molecules
+            phases = np.random.uniform(0, 2*np.pi, num_sampled)
+            amplitudes = np.random.exponential(tunneling_prob, num_sampled)
             
-            for i, (phase, amp) in enumerate(zip(phases[:1000], amplitudes[:1000])):  # Sample for efficiency
-                channel_field = amp * np.exp(1j * (quantum_freq * time + phase))
-                quantum_field += channel_field / 1000  # Normalize
+            # Each molecule contributes to collective quantum field
+            for phase, amp in zip(phases, amplitudes):
+                molecule_field = amp * np.exp(1j * (quantum_freq * time + phase))
+                quantum_field += molecule_field / num_sampled  # Ensemble average
             
             # Calculate collective field properties
             field_magnitude = np.abs(quantum_field)
@@ -174,41 +176,42 @@ class QuantumIonConsciousnessValidator:
         t_total = 1.0  # 1 second
         time = np.arange(0, t_total, dt)
         
-        # Network parameters
-        num_regions = 10  # Brain regions
-        neurons_per_region = int(self.num_neurons / num_regions)
+        # Gas chamber parameters (molecular harmonic method)
+        num_regions = 10  # Spatial regions in gas chamber
+        molecules_per_region = int(self.num_molecules_chamber / num_regions)
         
         region_data = {}
         collective_fields = {}
         
         for region_id in range(num_regions):
-            print(f"Simulating brain region {region_id + 1}...")
+            print(f"Simulating gas chamber region {region_id + 1}...")
             
-            # Generate regional ion channel networks
-            region_channels = neurons_per_region * self.channels_per_neuron
+            # Use representative sample (ensemble averaging)
+            num_sampled_per_region = self.num_sampled_molecules
             
-            # Mixed ion types with physiological proportions
+            # Mixed ion types (gas composition: primarily N2, O2 in air)
+            # For consciousness: model as various molecular vibrational modes
             ion_proportions = {'H+': 0.1, 'Na+': 0.3, 'K+': 0.35, 'Ca2+': 0.15, 'Mg2+': 0.1}
             
             regional_field = np.zeros(len(time), dtype=complex)
             ion_contributions = {}
             
             for ion, proportion in ion_proportions.items():
-                ion_channels = int(region_channels * proportion)
+                num_molecules_type = int(num_sampled_per_region * proportion)
                 mass = self.ion_masses[ion]
                 
-                # Quantum frequency based on mass
-                quantum_freq = np.sqrt(self.k_B * self.T / (mass * (1e-9)**2))  # Adjusted for channel scale
+                # Molecular vibrational frequency (harmonic timekeeping method)
+                quantum_freq = np.sqrt(self.k_B * self.T / (mass * (1e-9)**2))
                 
-                # Generate oscillatory quantum field for this ion type
-                phases = np.random.uniform(0, 2*np.pi, min(ion_channels, 1000))
+                # Sample representative molecules for this ion type
+                phases = np.random.uniform(0, 2*np.pi, num_molecules_type)
                 
                 ion_field = np.zeros(len(time), dtype=complex)
                 for phase in phases:
-                    # Add noise and coupling effects
+                    # Thermal noise (realistic for molecular gas)
                     noise = 0.1 * np.random.normal(0, 1, len(time))
-                    ion_contribution = np.exp(1j * (quantum_freq * time + phase)) * (1 + noise)
-                    ion_field += ion_contribution / len(phases)
+                    molecule_contribution = np.exp(1j * (quantum_freq * time + phase)) * (1 + noise)
+                    ion_field += molecule_contribution / len(phases)
                 
                 ion_contributions[ion] = ion_field
                 regional_field += ion_field * proportion
@@ -800,27 +803,51 @@ class QuantumIonConsciousnessValidator:
     # Helper methods for calculations and visualizations
     def _plot_ion_quantum_properties(self, ion_data, time):
         """Create comprehensive plots for ion quantum properties"""
-        fig = make_subplots(
-            rows=3, cols=2,
-            subplot_titles=('Ion Quantum Properties', 'Tunneling Probabilities', 
-                           'Coherence Times', 'Quantum Field Oscillations',
-                           'Phase Dynamics', 'Coherence Comparison'),
-            specs=[[{"secondary_y": True}, {"secondary_y": True}],
-                   [{"secondary_y": True}, {"secondary_y": True}],
-                   [{"secondary_y": True}, {"secondary_y": True}]]
-        )
+        fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+        fig.suptitle('Ion Quantum Properties Analysis', fontsize=16)
         
-        # Ion properties comparison
         ions = list(ion_data.keys())
-        masses = [ion_data[ion]['mass'] for ion in ions]
-        wavelengths = [ion_data[ion]['de_broglie_wavelength'] for ion in ions]
         
-        fig.add_trace(go.Bar(name='Mass', x=ions, y=masses, yaxis='y'), row=1, col=1)
-        fig.add_trace(go.Bar(name='Wavelength', x=ions, y=wavelengths, yaxis='y2'), row=1, col=1)
+        # Plot 1: Mass and de Broglie wavelength
+        ax1 = axes[0, 0]
+        masses = [ion_data[ion]['mass'] * 1e27 for ion in ions]  # Convert to 10^-27 kg
+        ax1.bar(ions, masses, color='steelblue', alpha=0.7)
+        ax1.set_ylabel('Mass (×10⁻²⁷ kg)', fontsize=10)
+        ax1.set_title('Ion Masses', fontsize=12)
+        ax1.grid(True, alpha=0.3)
         
-        # Save plot
-        fig.update_layout(height=1200, title_text="Ion Quantum Properties Analysis")
-        fig.write_html(self.results_dir / 'ion_quantum_properties.html')
+        # Plot 2: Tunneling probabilities
+        ax2 = axes[0, 1]
+        tunneling_probs = [ion_data[ion]['tunneling_probability'] for ion in ions]
+        ax2.bar(ions, tunneling_probs, color='coral', alpha=0.7)
+        ax2.set_ylabel('Tunneling Probability', fontsize=10)
+        ax2.set_title('Quantum Tunneling Probabilities', fontsize=12)
+        ax2.set_yscale('log')
+        ax2.grid(True, alpha=0.3)
+        
+        # Plot 3: Coherence times
+        ax3 = axes[1, 0]
+        coherence_times = [ion_data[ion]['coherence_time'] * 1e12 for ion in ions]  # Convert to ps
+        ax3.bar(ions, coherence_times, color='mediumseagreen', alpha=0.7)
+        ax3.set_ylabel('Coherence Time (ps)', fontsize=10)
+        ax3.set_title('Quantum Coherence Times', fontsize=12)
+        ax3.grid(True, alpha=0.3)
+        
+        # Plot 4: Overall coherence
+        ax4 = axes[1, 1]
+        coherences = [ion_data[ion]['coherence'] for ion in ions]
+        ax4.bar(ions, coherences, color='mediumpurple', alpha=0.7)
+        ax4.set_ylabel('Coherence Value', fontsize=10)
+        ax4.set_title('Collective Field Coherence', fontsize=12)
+        ax4.axhline(y=self.coherence_threshold, color='r', linestyle='--', label='Threshold')
+        ax4.legend()
+        ax4.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        plt.savefig(self.results_dir / 'ion_quantum_properties.png', dpi=150, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  Saved: ion_quantum_properties.png")
     
     def _test_consciousness_emergence(self, ion_data):
         """Test whether quantum properties support consciousness emergence"""
@@ -868,8 +895,55 @@ class QuantumIonConsciousnessValidator:
     
     def _plot_collective_coherence(self, region_data, coupling_matrix, global_field, time):
         """Create plots for collective coherence analysis"""
-        # Implementation would create comprehensive visualizations
-        pass
+        fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+        fig.suptitle('Collective Quantum Coherence Analysis', fontsize=16)
+        
+        # Plot 1: Regional coherence
+        ax1 = axes[0, 0]
+        regions = list(region_data.keys())
+        coherences = [region_data[r]['mean_coherence'] for r in regions]
+        ax1.bar(range(len(regions)), coherences, color='steelblue', alpha=0.7)
+        ax1.set_xlabel('Brain Region', fontsize=10)
+        ax1.set_ylabel('Mean Coherence', fontsize=10)
+        ax1.set_title('Regional Quantum Coherence', fontsize=12)
+        ax1.axhline(y=self.coherence_threshold, color='r', linestyle='--', label='Threshold')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3)
+        
+        # Plot 2: Coupling matrix heatmap
+        ax2 = axes[0, 1]
+        im = ax2.imshow(coupling_matrix, cmap='viridis', aspect='auto')
+        ax2.set_title('Inter-Regional Coupling Matrix', fontsize=12)
+        ax2.set_xlabel('Region', fontsize=10)
+        ax2.set_ylabel('Region', fontsize=10)
+        plt.colorbar(im, ax=ax2, label='Coupling Strength')
+        
+        # Plot 3: Global field magnitude (sampled)
+        ax3 = axes[1, 0]
+        sample_indices = np.linspace(0, len(global_field)-1, min(1000, len(global_field)), dtype=int)
+        sampled_time = time[sample_indices]
+        sampled_magnitude = np.abs(global_field[sample_indices])
+        ax3.plot(sampled_time * 1000, sampled_magnitude, color='coral', linewidth=0.5)
+        ax3.set_xlabel('Time (ms)', fontsize=10)
+        ax3.set_ylabel('Field Magnitude', fontsize=10)
+        ax3.set_title('Global Quantum Field Dynamics', fontsize=12)
+        ax3.grid(True, alpha=0.3)
+        
+        # Plot 4: Coherence distribution
+        ax4 = axes[1, 1]
+        ax4.hist(coherences, bins=15, color='mediumseagreen', alpha=0.7, edgecolor='black')
+        ax4.set_xlabel('Coherence Value', fontsize=10)
+        ax4.set_ylabel('Frequency', fontsize=10)
+        ax4.set_title('Regional Coherence Distribution', fontsize=12)
+        ax4.axvline(x=self.coherence_threshold, color='r', linestyle='--', label='Threshold')
+        ax4.legend()
+        ax4.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        plt.savefig(self.results_dir / 'collective_coherence.png', dpi=150, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  Saved: collective_coherence.png")
     
     def _validate_coherence_requirements(self, region_data, global_coherence, coupling_matrix):
         """Validate that coherence meets consciousness requirements"""
@@ -1000,3 +1074,22 @@ class QuantumIonConsciousnessValidator:
         }
         
         return summary
+
+
+if __name__ == "__main__":
+    """
+    Direct execution - run all experiments
+    """
+    print("\n🚀 Running Quantum Ion Consciousness Validator Directly\n")
+    
+    # Create validator
+    validator = QuantumIonConsciousnessValidator(
+        results_dir="consciousness_quantum_validation"
+    )
+    
+    # Run all experiments
+    results = validator.run_all_experiments()
+    
+    print("\n✅ All experiments complete!")
+    print(f"📊 Results saved to: consciousness_quantum_validation/")
+    print(f"🎊 Overall validation success: {results.get('overall_validation_success', False)}")

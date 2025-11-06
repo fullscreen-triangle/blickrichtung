@@ -1,0 +1,96 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: classical-mechanics-consiousness-emergence.aux
+Reallocating 'name_of_file' (item size: 1) to 10 items.
+The style file: naturemag.bst
+I found no \bibdata command---while reading file classical-mechanics-consiousness-emergence.aux
+Warning--I didn't find a database entry for "landau1980"
+Warning--I didn't find a database entry for "ashcroft1976"
+Warning--I didn't find a database entry for "buzsaki2006"
+Warning--I didn't find a database entry for "phillips2012"
+Warning--I didn't find a database entry for "gibbs1902"
+Warning--I didn't find a database entry for "boltzmann1877"
+Warning--I didn't find a database entry for "shannon1948"
+Warning--I didn't find a database entry for "jaynes1957"
+Warning--I didn't find a database entry for "cohen1977"
+Warning--I didn't find a database entry for "devault1984"
+Warning--I didn't find a database entry for "ball2011"
+Warning--I didn't find a database entry for "ellis2001"
+Warning--I didn't find a database entry for "minton2001"
+Warning--I didn't find a database entry for "zimmerman1991"
+Warning--I didn't find a database entry for "schamel1986"
+Warning--I didn't find a database entry for "bernstein1957"
+Warning--I didn't find a database entry for "dupree1982"
+Warning--I didn't find a database entry for "matsumoto1994"
+Warning--I didn't find a database entry for "ergun1998"
+Warning--I didn't find a database entry for "shockley1950"
+Warning--I didn't find a database entry for "sze2006"
+Warning--I didn't find a database entry for "kittel2004"
+Warning--I didn't find a database entry for "cukier1998"
+Warning--I didn't find a database entry for "hammes-schiffer2001"
+Warning--I didn't find a database entry for "weinberg2012"
+Warning--I didn't find a database entry for "mitchell1961"
+Warning--I didn't find a database entry for "saraste1999"
+Warning--I didn't find a database entry for "wikstrom1977"
+Warning--I didn't find a database entry for "deisenhofer1989"
+Warning--I didn't find a database entry for "nelson2011"
+Warning--I didn't find a database entry for "huynh2007"
+Warning--I didn't find a database entry for "reece2009"
+Warning--I didn't find a database entry for "marcus1956"
+Warning--I didn't find a database entry for "marcus1993"
+Warning--I didn't find a database entry for "klimesch1999"
+Warning--I didn't find a database entry for "varela2001"
+Warning--I didn't find a database entry for "hill1986"
+Warning--I didn't find a database entry for "chalmers1995"
+Warning--I didn't find a database entry for "nagel1974"
+Warning--I didn't find a database entry for "logothetis2001"
+Warning--I didn't find a database entry for "attwell2002"
+Warning--I didn't find a database entry for "singer1999"
+Warning--I didn't find a database entry for "franks2008"
+Warning--I didn't find a database entry for "brown2011"
+Warning--I didn't find a database entry for "malmstrom1982"
+Warning--I didn't find a database entry for "chance1979"
+Warning--I didn't find a database entry for "magistretti2000"
+Warning--I didn't find a database entry for "sokoloff1977"
+You've used 0 entries,
+            2348 wiz_defined-function locations,
+            1022 strings with 9318 characters,
+and the built_in function-call counts, 28 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 7
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 8
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 7
+(There was 1 error message)

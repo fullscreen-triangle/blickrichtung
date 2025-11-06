@@ -859,8 +859,73 @@ class BMDFrameSelectionValidator:
     def _plot_frame_selection_dynamics(self, frames, experience_sequence, 
                                      frame_selection_sequence, selection_probabilities, analysis):
         """Create plots for frame selection dynamics"""
-        # Implementation would create comprehensive visualizations
-        pass
+        fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+        fig.suptitle('BMD Frame Selection Dynamics Analysis', fontsize=16)
+        
+        # Plot 1: Selection probability over time
+        ax1 = axes[0, 0]
+        sample_size = min(500, len(selection_probabilities))
+        sample_indices = np.linspace(0, len(selection_probabilities)-1, sample_size, dtype=int)
+        sampled_probs = [selection_probabilities[i] for i in sample_indices]
+        ax1.plot(sample_indices, sampled_probs, color='steelblue', linewidth=0.8, alpha=0.7)
+        ax1.set_xlabel('Experience Number', fontsize=10)
+        ax1.set_ylabel('Selection Probability', fontsize=10)
+        ax1.set_title('Frame Selection Probability Over Time', fontsize=12)
+        ax1.axhline(y=self.consciousness_threshold, color='r', linestyle='--', label='Threshold')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3)
+        
+        # Plot 2: Frame usage distribution
+        ax2 = axes[0, 1]
+        frame_counts = {}
+        for frame_id in frame_selection_sequence:
+            frame_counts[frame_id] = frame_counts.get(frame_id, 0) + 1
+        
+        sorted_counts = sorted(frame_counts.values(), reverse=True)[:50]  # Top 50 frames
+        ax2.bar(range(len(sorted_counts)), sorted_counts, color='coral', alpha=0.7)
+        ax2.set_xlabel('Frame Rank', fontsize=10)
+        ax2.set_ylabel('Selection Count', fontsize=10)
+        ax2.set_title('Top 50 Frame Usage Distribution', fontsize=12)
+        ax2.grid(True, alpha=0.3, axis='y')
+        
+        # Plot 3: Frame category distribution
+        ax3 = axes[1, 0]
+        category_counts = {}
+        for frame_id in frame_selection_sequence:
+            if frame_id in frames:
+                category = frames[frame_id]['category']
+                category_counts[category] = category_counts.get(category, 0) + 1
+        
+        categories = list(category_counts.keys())
+        counts = list(category_counts.values())
+        ax3.bar(categories, counts, color='mediumseagreen', alpha=0.7)
+        ax3.set_xlabel('Frame Category', fontsize=10)
+        ax3.set_ylabel('Selection Count', fontsize=10)
+        ax3.set_title('Frame Category Distribution', fontsize=12)
+        ax3.tick_params(axis='x', rotation=45)
+        ax3.grid(True, alpha=0.3, axis='y')
+        
+        # Plot 4: Selection statistics
+        ax4 = axes[1, 1]
+        stats = [
+            ('Mean Prob', analysis['mean_selection_probability']),
+            ('Selection Entropy', analysis['selection_entropy'] / 10),  # Normalize for display
+            ('Threshold', self.consciousness_threshold)
+        ]
+        labels = [s[0] for s in stats]
+        values = [s[1] for s in stats]
+        colors_bars = ['steelblue', 'coral', 'mediumseagreen']
+        
+        bars = ax4.barh(labels, values, color=colors_bars, alpha=0.7)
+        ax4.set_xlabel('Value', fontsize=10)
+        ax4.set_title('Selection Statistics', fontsize=12)
+        ax4.grid(True, alpha=0.3, axis='x')
+        
+        plt.tight_layout()
+        plt.savefig(self.results_dir / 'frame_selection_dynamics.png', dpi=150, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  Saved: frame_selection_dynamics.png")
     
     def _analyze_uncertainty_peak(self, df):
         """Analyze 50% uncertainty peak in memory selection"""
@@ -1047,3 +1112,22 @@ class BMDFrameSelectionValidator:
         }
         
         return summary
+
+
+if __name__ == "__main__":
+    """
+    Direct execution - run all experiments
+    """
+    print("\n🚀 Running BMD Frame Selection Validator Directly\n")
+    
+    # Create validator
+    validator = BMDFrameSelectionValidator(
+        results_dir="consciousness_bmd_validation"
+    )
+    
+    # Run all experiments
+    results = validator.run_all_experiments()
+    
+    print("\n✅ All experiments complete!")
+    print(f"📊 Results saved to: consciousness_bmd_validation/")
+    print(f"🎊 Overall validation success: {results.get('overall_validation_success', False)}")
