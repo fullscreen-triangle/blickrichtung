@@ -1,0 +1,76 @@
+{
+  "timestamp": "20251106_211754",
+  "description": "Therapeutic windows for consciousness programming drugs",
+  "results": [
+    {
+      "drug_name": "lithium",
+      "min_effective_dose_mg": 0.12826498305280606,
+      "max_safe_dose_mg": 32.39742629528195,
+      "therapeutic_index": 252.58200269627832,
+      "optimal_dose_mg": 0.28870909173592363,
+      "dosing_frequency_per_day": 3.0,
+      "state_space_reduction": 0.30093593726746487,
+      "phase_coherence_increase": 0.3685566449765935,
+      "programming_specificity": 0.910279290964326,
+      "narrow_window": true,
+      "toxicity_risk": "low",
+      "individual_variability": 50.0
+    },
+    {
+      "drug_name": "dopamine",
+      "min_effective_dose_mg": 47.27969591600391,
+      "max_safe_dose_mg": 1000.0,
+      "therapeutic_index": 21.150728248687948,
+      "optimal_dose_mg": 105.44427935261685,
+      "dosing_frequency_per_day": 2.0,
+      "state_space_reduction": 0.29932206707920195,
+      "phase_coherence_increase": 0.36796696744325835,
+      "programming_specificity": 0.9100586686374487,
+      "narrow_window": false,
+      "toxicity_risk": "low",
+      "individual_variability": 25.0
+    },
+    {
+      "drug_name": "serotonin",
+      "min_effective_dose_mg": 81.45371766280745,
+      "max_safe_dose_mg": 1000.0,
+      "therapeutic_index": 12.276910479883592,
+      "optimal_dose_mg": 183.34254825622907,
+      "dosing_frequency_per_day": 2.0,
+      "state_space_reduction": 0.3010222627280375,
+      "phase_coherence_increase": 0.3685882220590249,
+      "programming_specificity": 0.9102359281265697,
+      "narrow_window": false,
+      "toxicity_risk": "low",
+      "individual_variability": 25.0
+    },
+    {
+      "drug_name": "ssri_fluoxetine",
+      "min_effective_dose_mg": 3.5772850993678733,
+      "max_safe_dose_mg": 1000.0,
+      "therapeutic_index": 279.5415999067857,
+      "optimal_dose_mg": 8.052039670825474,
+      "dosing_frequency_per_day": 2.0,
+      "state_space_reduction": 0.3011958140438082,
+      "phase_coherence_increase": 0.36865171647844647,
+      "programming_specificity": 0.9101487289470243,
+      "narrow_window": false,
+      "toxicity_risk": "low",
+      "individual_variability": 25.0
+    },
+    {
+      "drug_name": "alprazolam",
+      "min_effective_dose_mg": 2.8671964974937696,
+      "max_safe_dose_mg": 1000.0,
+      "therapeutic_index": 348.77274748141775,
+      "optimal_dose_mg": 6.39448842855694,
+      "dosing_frequency_per_day": 3.0,
+      "state_space_reduction": 0.2999623604446761,
+      "phase_coherence_increase": 0.3682007683024205,
+      "programming_specificity": 0.9107107148345551,
+      "narrow_window": true,
+      "toxicity_risk": "low",
+      "individual_variability": 50.0
+    }
+  ]
+}

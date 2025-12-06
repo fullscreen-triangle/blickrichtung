@@ -287,7 +287,19 @@ def main():
             input_signal=100.0
         )
         
-        all_results.append(results.__dict__)
+        # Convert dataclass to dict properly
+        results_dict = {
+            'drug_name': results.drug_name,
+            'active_levels': results.active_levels,
+            'total_levels': results.total_levels,
+            'hierarchical_depth': results.hierarchical_depth,
+            'end_to_end_flux_ratio': results.end_to_end_flux_ratio,
+            'total_information_compression': results.total_information_compression,
+            'total_atp_cost': results.total_atp_cost,
+            'atp_efficiency': results.atp_efficiency,
+            'level_results': results.level_results  # Already a list of dicts
+        }
+        all_results.append(results_dict)
         
         # Store flux data for plotting
         all_flux_data[condition] = {

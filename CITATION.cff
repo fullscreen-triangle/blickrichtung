@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Blickrichtung: Consciousness Programming Framework"
+abstract: "A rigorous computational framework for biological consciousness programming through pharmaceutical oscillatory state manipulation. Includes theoretical foundations, computational validations, and clinical applications across pharmaceutical phase-lock programming, hybrid meta-language pharmacodynamics, and hierarchical metabolic computing."
+authors:
+  - family-names: "Sachikonye"
+    given-names: "Kundai"
+    affiliation: "St Stella's Institute for Theoretical Biology and Consciousness Studies"
+    city: "Harare"
+    country: "ZW"
+repository-code: "https://github.com/yourusername/blickrichtung"
+url: "https://github.com/yourusername/blickrichtung"
+keywords:
+  - consciousness programming
+  - pharmaceutical computing
+  - biological oscillations
+  - metabolic hierarchies
+  - thermodynamic computation
+  - Kuramoto oscillators
+  - biological Maxwell demons
+  - oxygen-hydrogen coupling
+  - phase-lock programming
+  - computational pharmacology
+license: MIT
+version: 1.0.0
+date-released: 2025-12-06
+
+references:
+  - type: article
+    title: "Pharmaceutical Phase-Lock Programming: Computational Validation of Drug-Induced Oscillatory State Transformation as Universal Computation"
+    authors:
+      - family-names: "Sachikonye"
+        given-names: "Kundai"
+    year: 2025
+    status: in-preparation
+    scope: "Core theoretical and computational framework for phase-lock programming"
+    
+  - type: article
+    title: "Hybrid Meta-Language Pharmacodynamics: Thermodynamic Computation in Biological Systems"
+    authors:
+      - family-names: "Sachikonye"
+        given-names: "Kundai"
+    year: 2025
+    status: in-preparation
+    scope: "Theoretical computer science foundation for biological computation"
+    
+  - type: article
+    title: "Oxygen-Hydrogen Coupling in Hierarchical Metabolic Computing: From Glucose Transport to Gene Expression"
+    authors:
+      - family-names: "Sachikonye"
+        given-names: "Kundai"
+    year: 2025
+    status: in-preparation
+    scope: "Five-level metabolic architecture as hierarchical information processing"
+

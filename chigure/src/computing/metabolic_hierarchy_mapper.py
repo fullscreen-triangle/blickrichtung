@@ -404,20 +404,26 @@ def main():
         
         print(f"\nHierarchical Mapping:")
         print(f"Current Depth:                 {mapping['current_depth']:.2f}")
-        print(f"Target Depth:                  {mapping['target_depth']:.2f}")
-        print(f"Depth Deficit:                 {mapping['depth_deficit']:.2f}")
-        print(f"Primary Pathway Affected:      {mapping['primary_pathway']}")
-        print(f"\nDysfunction Pattern:")
-        for dm in mapping['dysfunction_levels']:
-            status = "✗" if dm['affected'] else "✓"
-            severity = dm['dysfunction_severity']
-            severity_str = f"{severity:.2f}" if severity >= 0 else f"+{abs(severity):.2f}"
-            print(f"  L{dm['level']} {dm['name']:25s} {status}  Severity: {severity_str}")
         
-        print(f"\nTherapeutic Recommendation:")
-        print(f"Recommended Drug:              {mapping['recommended_drug']}")
-        print(f"Expected Timeline:             {mapping['expected_timeline_weeks']} weeks")
-        print(f"Monitoring Frequency:          {mapping['monitoring_frequency']}")
+        # Handle healthy patients (no target_depth)
+        if mapping.get('target_depth') is not None:
+            print(f"Target Depth:                  {mapping['target_depth']:.2f}")
+            print(f"Depth Deficit:                 {mapping['depth_deficit']:.2f}")
+            print(f"Primary Pathway Affected:      {mapping['primary_pathway']}")
+        # Only print dysfunction pattern and recommendations if not healthy
+        if mapping.get('dysfunction_levels'):
+            print(f"\nDysfunction Pattern:")
+            for dm in mapping['dysfunction_levels']:
+                status = "✗" if dm['affected'] else "✓"
+                severity = dm['dysfunction_severity']
+                severity_str = f"{severity:.2f}" if severity >= 0 else f"+{abs(severity):.2f}"
+                print(f"  L{dm['level']} {dm['name']:25s} {status}  Severity: {severity_str}")
+        
+        if mapping.get('recommended_drug'):
+            print(f"\nTherapeutic Recommendation:")
+            print(f"Recommended Drug:              {mapping['recommended_drug']}")
+            print(f"Expected Timeline:             {mapping['expected_timeline_weeks']} weeks")
+            print(f"Monitoring Frequency:          {mapping['monitoring_frequency']}")
     
     # Save results
     output_dir = Path("chatelier/src/computing/results")

@@ -78,3 +78,61 @@ public/laboratory/
 .coverage
 htmlcov/
 .pytest_cache/
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.idx
+*.ilg
+*.ind
+*.pdf
+!docs/computing/oxygen-hydrogen-coupling/figures/*.pdf
+!publication/*.pdf
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# OS specific
+Thumbs.db
+desktop.ini
+
+# Node (if any JavaScript tooling)
+node_modules/
+package-lock.json
+
+# R (if any R scripts)
+.Rhistory
+.RData
+.Rproj.user
+
+# MATLAB
+*.asv
+*.m~
+
+# Temporary computation results
+results/temp/
+*.tmp
+
+# Large data files (keep small test data)
+*.gz
+!docs/**/*.gz
+*.zip
+!docs/**/*.zip
+*.tar
+*.tar.gz
+
+# Personal notes (optional)
+NOTES.md
+TODO_PERSONAL.md
+.private/
