@@ -389,5 +389,5 @@ This software is provided for research purposes only. It is not intended for cli
 
 **Version**: 1.0.0  
 **Last Updated**: December 2025  
-**Repository**: https://github.com/yourusername/blickrichtung
+**Repository**: https://github.com/fullsceen-triangle/blickrichtung
 

@@ -1,22 +1,25 @@
 """
-Psychon: Fundamental Unit of Mental Activity (REDESIGNED for Tri-Dimensional S-Coordinate BMD Operation)
+Psychon: Fundamental Unit of Mental Activity (Categorical Aperture Framework)
 
-CRITICAL INSIGHT: S-entropy IS the mathematical formalization of BMDs (user realized days ago).
+FOUNDATIONAL INSIGHT: Maxwell's Demons do not exist. What was previously
+conceptualized as "BMD filtering" is actually CATEGORICAL APERTURE operation -
+zero-cost topological filtering that reveals pre-existing structure.
 
-A psychon is NOT a fixed object—it's a categorical filtering window that compresses
-~10^6 potential equivalence classes into a single actual state through BMD operation.
-
-Theoretical Foundation:
-- From st-stellas-categories.tex: S-entropy as BMD formalization
-- From st-stellas-circuits.tex: Tri-dimensional circuit operation
-- From st-stellas-dictionary.tex: Memory as S-coordinate indexed dictionary
-- From biological-integrated-circuits.tex: Complete BIC architecture
+Theoretical Foundation (Updated):
+- Categorical Aperture: W_aperture = 0 (zero thermodynamic cost)
+- Partition Depth: M = Σ log_b(k_i) determines distinguishability
+- Phase-Lock Networks: dG_PL/dE_kin = 0 (velocity-blind)
+- S-Entropy Coordinates: (S_k, S_t, S_e) ∈ [0,1]³ for categorical state
 
 Key Properties:
 - PRIMARY tri-dimensional S-coordinates: (S_knowledge, S_time, S_entropy)
 - EXTENDED coordinates for refinement: (S_packing, S_hydrophobic)
-- Categorical equivalence class membership (~10^6 classes → 1 selected)
-- BMD filtering state (information catalysis rate: 0-3000 bits/molecule)
+- Categorical equivalence class membership via topological filtering
+- Partition depth determines information structure (not BMD "efficiency")
+
+Paradigm Shift:
+- OLD: BMDs compress 10^6 classes through "sorting" (violates thermodynamics)
+- NEW: Categorical aperture reveals pre-existing structure (W = 0)
 """
 
 from dataclasses import dataclass, field
@@ -30,83 +33,102 @@ import uuid
 class CategoricalEquivalenceClass:
     """
     A single equivalence class in categorical space.
-    
-    From st-stellas-categories.tex: BMDs filter potential states to actual states
-    by selecting categorical equivalence classes. Each class represents a set of
-    states that are indistinguishable under categorical completion.
-    
+
+    Categorical completion reveals which equivalence class a partial
+    specification belongs to. This is NOT filtering or selection -
+    it is geometric completion of pre-existing structure.
+
     Attributes:
         class_id: Unique identifier for this equivalence class
         representative_state: The canonical representative of this class
         member_count: Number of states in this equivalence class
         probability: P(equivalence class) for S_knowledge calculation
+        partition_depth: M value for this class (from partition depth theory)
     """
     class_id: int
     representative_state: np.ndarray  # Canonical state vector
     member_count: int
     probability: float  # P(class)
-    
+    partition_depth: float = 1.0  # M = Σ log_b(k_i)
+
     def __post_init__(self):
         """Validate equivalence class parameters."""
         assert 0.0 < self.probability <= 1.0, f"Probability must be in (0,1], got {self.probability}"
         assert self.member_count > 0, f"Member count must be positive, got {self.member_count}"
+        assert self.partition_depth >= 0, f"Partition depth must be non-negative, got {self.partition_depth}"
 
 
 @dataclass
-class BMDFilteringState:
+class CategoricalApertureState:
     """
-    State of BMD categorical filtering for a psychon.
-    
-    BMDs compress ~10^6 potential categorical equivalence classes down to a filtered
-    set, then select one as the actual state through S-entropy minimization.
-    
+    State of categorical aperture for a psychon.
+
+    CRITICAL: This is NOT a Maxwell's demon filter. The categorical aperture
+    is a topological constraint that admits certain trajectories. It does
+    ZERO work (W_aperture = 0) and reveals pre-existing structure.
+
+    Key distinction:
+    - OLD (incorrect): BMD "filters" and "selects" classes
+    - NEW (correct): Aperture topology admits geometrically compatible states
+
     Attributes:
-        total_potential_classes: Total number of categorical equivalence classes (~10^6)
-        filtered_classes: Set of equivalence classes that passed BMD filtering
-        active_class: The currently selected equivalence class (actual state)
-        filtering_efficiency: Information catalysis rate (bits/molecule, 0-3000)
-        amplification_factor: Transition probability amplification (measured: 4.2×10^9 for lithium)
+        total_potential_classes: Total number of categorical equivalence classes
+        admitted_classes: Set of classes admitted by aperture topology
+        active_class: The realized equivalence class
+        partition_depth: M value (partition depth theory)
+        phase_coherence: Order parameter ⟨r⟩ from phase-lock network
+        work_done: MUST be 0.0 - apertures do no work
     """
     total_potential_classes: int
-    filtered_classes: Set[int]  # Set of class IDs that passed filtering
-    active_class: int  # The selected class ID
-    filtering_efficiency: float  # bits/molecule, 0 to 3000
-    amplification_factor: float = 4.2e9  # Default: lithium-level amplification
-    
+    admitted_classes: Set[int]  # Classes admitted by topology (NOT filtered)
+    active_class: int  # The realized class
+    partition_depth: float = 1.0  # M = Σ log_b(k_i)
+    phase_coherence: float = 0.5  # ⟨r⟩ ∈ [0, 1]
+    work_done: float = 0.0  # W_aperture = 0 (fundamental)
+
     def __post_init__(self):
-        """Validate BMD filtering state."""
-        assert self.active_class in self.filtered_classes, \
-            f"Active class {self.active_class} must be in filtered classes {self.filtered_classes}"
-        assert 0 <= self.filtering_efficiency <= 3000, \
-            f"Filtering efficiency must be in [0, 3000], got {self.filtering_efficiency}"
-        assert self.amplification_factor > 0, \
-            f"Amplification factor must be positive, got {self.amplification_factor}"
+        """Validate categorical aperture state."""
+        assert self.active_class in self.admitted_classes, \
+            f"Active class {self.active_class} must be in admitted classes {self.admitted_classes}"
+        assert self.partition_depth >= 0, \
+            f"Partition depth must be non-negative, got {self.partition_depth}"
+        assert 0 <= self.phase_coherence <= 1, \
+            f"Phase coherence must be in [0, 1], got {self.phase_coherence}"
+        assert self.work_done == 0.0, \
+            f"Categorical apertures do ZERO work, got W = {self.work_done}"
+
+
+# Legacy alias for backwards compatibility
+BMDFilteringState = CategoricalApertureState
         
 
 @dataclass
 class Psychon:
     """
-    Fundamental unit of mental activity (REDESIGNED for tri-dimensional BMD operation).
-    
-    PARADIGM SHIFT: Psychons are categorical filtering windows, not fixed states.
-    They compress ~10^6 equivalence classes into optimal solutions through BMD operation.
-    
+    Fundamental unit of mental activity (Categorical Aperture Framework).
+
+    PARADIGM: Psychons are trajectory-terminus pairs in S-entropy space.
+    Mental states are identified by the path taken, not just the endpoint.
+
+    From Virtual Brain Computing Framework:
+    M = (γ, Γ_f) where γ is trajectory and Γ_f is terminus state
+
     Attributes:
         id: Unique identifier
         timestamp: Creation time (Unix timestamp)
-        
-        PRIMARY TRI-DIMENSIONAL S-COORDINATES (st-stellas-categories.tex):
+
+        PRIMARY TRI-DIMENSIONAL S-COORDINATES:
         s_knowledge: Information deficit, -log(P(equivalence_class))
         s_time: Temporal position, steps_to_completion / total_steps [0, 1]
         s_entropy: Categorical entropy, Σ p_i log(p_i) [≥ 0]
-        
-        EXTENDED COORDINATES (hardware-lipid LLM refinement):
+
+        EXTENDED COORDINATES:
         s_packing: Geometric packing configuration
         s_hydrophobic: Energy landscape (hydrophobicity)
-        
-        CATEGORICAL FILTERING (BMD operation):
+
+        CATEGORICAL APERTURE (replaces BMD):
         equivalence_class: The categorical equivalence class this psychon represents
-        bmd_filtering: State of BMD filtering (~10^6 classes → 1 selected)
+        aperture_state: State of categorical aperture (zero-work topology)
         
         PHYSICAL PROPERTIES:
         frequency: Characteristic oscillation frequency (Hz)
@@ -147,7 +169,7 @@ class Psychon:
     
     # CATEGORICAL FILTERING (BMD operation)
     equivalence_class: Optional[CategoricalEquivalenceClass] = None
-    bmd_filtering: Optional[BMDFilteringState] = None
+    aperture_state: Optional[BMDFilteringState] = None
     
     # PHYSICAL PROPERTIES
     frequency: float = 120.0  # Hz (default: engine firing frequency)
@@ -195,8 +217,8 @@ class Psychon:
             )
         
         # Initialize BMD filtering state if not provided
-        if self.bmd_filtering is None:
-            self.bmd_filtering = BMDFilteringState(
+        if self.aperture_state is None:
+            self.aperture_state = BMDFilteringState(
                 total_potential_classes=1000000,  # ~10^6 typical
                 filtered_classes={self.equivalence_class.class_id},
                 active_class=self.equivalence_class.class_id,
@@ -204,8 +226,8 @@ class Psychon:
             )
         
         # Validate BMD filtering consistency
-        assert self.equivalence_class.class_id == self.bmd_filtering.active_class, \
-            f"Equivalence class ID {self.equivalence_class.class_id} must match active class {self.bmd_filtering.active_class}"
+        assert self.equivalence_class.class_id == self.aperture_state.active_class, \
+            f"Equivalence class ID {self.equivalence_class.class_id} must match active class {self.aperture_state.active_class}"
     
     @property
     def primary_s_coordinates(self) -> np.ndarray:
@@ -363,7 +385,7 @@ class Psychon:
             'hole_concentrations': self.hole_concentrations,
             'parent_psychons': [self.id],
             'equivalence_class': self.equivalence_class,  # Share equivalence class initially
-            'bmd_filtering': self.bmd_filtering  # Share BMD filtering state initially
+            'aperture_state': self.aperture_state  # Share BMD filtering state initially
         }
         
         # Override with provided parameters
@@ -442,8 +464,8 @@ class Psychon:
             },
             'categorical_filtering': {
                 'equivalence_class_id': self.equivalence_class.class_id if self.equivalence_class else None,
-                'filtering_efficiency': self.bmd_filtering.filtering_efficiency if self.bmd_filtering else 0,
-                'active_class': self.bmd_filtering.active_class if self.bmd_filtering else None
+                'filtering_efficiency': self.aperture_state.filtering_efficiency if self.aperture_state else 0,
+                'active_class': self.aperture_state.active_class if self.aperture_state else None
             },
             'oscillatory_signature': self.oscillatory_signature,
             'hole_configuration': {
@@ -531,7 +553,7 @@ def create_psychon_from_signature(frequency: float, amplitude: float = 1.0,
         amplitude=amplitude,
         phase=phase,
         equivalence_class=equiv_class,
-        bmd_filtering=bmd_filter,
+        aperture_state=bmd_filter,
         **kwargs
     )
 
@@ -547,7 +569,7 @@ if __name__ == "__main__":
     print(f"Primary S-coords (K, T, E): {psychon.primary_s_coordinates}")
     print(f"Extended S-coords (5D): {psychon.extended_s_coordinates}")
     print(f"Equivalence class: {psychon.equivalence_class.class_id} ({psychon.equivalence_class.member_count} members)")
-    print(f"BMD filtering efficiency: {psychon.bmd_filtering.filtering_efficiency:.1f} bits/molecule\n")
+    print(f"BMD filtering efficiency: {psychon.aperture_state.filtering_efficiency:.1f} bits/molecule\n")
     
     # Create another psychon at harmonic (240 Hz)
     psychon2 = create_psychon_from_signature(240.0)
